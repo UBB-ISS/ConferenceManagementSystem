@@ -1,2 +1,0 @@
-# ConferenceManagementSystem
-ISS Course Project
