@@ -12,15 +12,11 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class UserConference {
+public class Section {
     @Id
     @GeneratedValue
     private int id;
 
+    private String name;
     private int conferenceID;
-    private int conferenceSectionID;
-    private int userID;
-    private Role role;
-    private int paperID;
-    private boolean paid;
 }
