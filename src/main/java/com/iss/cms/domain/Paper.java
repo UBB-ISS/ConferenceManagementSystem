@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Paper {
+public class Paper implements Serializable {
     @Id
     @GeneratedValue
     private int id;
