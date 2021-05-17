@@ -1,0 +1,41 @@
+<form>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h1 class="panel-title"> Submit proposal </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="form-label" for="abstract"> Abstract </label>
+        <input class="form-control" type="text" id="abstract" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="paper"> Paper </label>
+        <input class="form-control" type="text" id="paper" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="title"> Title </label>
+        <input class="form-control" type="text" id="title" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="authors"> Authors </label>
+        <p><em> Please add the authors separated by semicolon </em></p>
+        <input class="form-control" type="text" id="authors" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="keywords"> Keywords </label>
+        <p><em> Please add the keywords separated by semicolon </em></p>
+        <input class="form-control" type="text" id="keywords" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <button class="btn btn-info"> Submit </button>
+      <button class="btn btn-danger" (click)="goToConferencesPage()"> Cancel </button>
+    </div>
+  </div>
+</form>

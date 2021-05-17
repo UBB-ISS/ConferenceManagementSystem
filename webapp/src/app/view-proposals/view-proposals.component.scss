@@ -1,0 +1,26 @@
+.wrapper {
+  height: 80%;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 60% 20%;
+  grid-template-areas:
+    ". a . c ."
+    ". b b b ."
+    ". . . . . ";
+}
+
+.item1 {
+  grid-area: a;
+  align-self: end;
+}
+
+.item2 {
+  grid-area: b;
+  align-self: start;
+}
+
+.item3 {
+  grid-area: c;
+  justify-self: end;
+  align-self: end;
+}

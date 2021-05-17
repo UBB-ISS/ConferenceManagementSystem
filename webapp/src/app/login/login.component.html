@@ -1,0 +1,24 @@
+<div class="form">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h1 class="panel-title"> Conference Management System </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="form-label" for="username"> Username </label>
+        <input class="form-control" type="text" id="username" autocomplete="off" #username>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password"> Password </label>
+        <input class="form-control" type="password" id="password" autocomplete="off" #password>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <button class="btn btn-info" (click)="loginUser(username.value, password.value)"> Log In </button> <br> <br>
+      <a (click)="gotoForgetPassword()"> Forget Password? </a>
+    </div>
+  </div>
+</div>

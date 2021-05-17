@@ -1,0 +1,48 @@
+<div class="wrapper">
+  <div class="item1">
+    <h2> Conferences </h2>
+  </div>
+
+  <div class="item3" *ngIf="user.affiliation == 'admin'">
+    <button class="btn btn-secondary"> Add Conference </button>
+    <button class="btn btn-secondary"> Set Deadlines </button>
+  </div>
+
+  <div class="item2">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th> Name </th>
+        <th> Price </th>
+        <th> Date </th>
+        <th>  </th>
+      </tr>
+      </thead>
+
+      <!--<tr *ngFor="let conference in conferences" (dblclick)="goToRolesPage()">
+        <td> {{conference.name}} </td>
+        <td> {{conference.price}} </td>
+        <td> {{conference.date}}} </td>
+        <td> <div class="buttons"> <button class="buttons" (click)=""> Create a proposal </button>
+             <button class="btn btn-secondary" (click)="goToViewProposalsPage()"> View proposals </button> </div> </td>
+      </tr>-->
+      <tbody>
+      <tr (dblclick)="goToRolesPage()">
+        <td> John </td>
+        <td> 100 </td>
+        <td> 2020/11/12 </td>
+        <td> <div class="buttons"> <button class="btn btn-secondary" (click)="goToSubmitProposalPage()"> Create a proposal </button>
+          <button class="btn btn-secondary" (click)="goToViewProposalsPage()"> View proposals </button> </div> </td>
+      </tr>
+
+      <tr (dblclick)="goToRolesPage()">
+        <td> Jack </td>
+        <td> 50 </td>
+        <td> 2021/01/12 </td>
+        <td> <div class="buttons"> <button class="btn btn-secondary" (click)="goToSubmitProposalPage()"> Create a proposal </button>
+          <button class="btn btn-secondary" (click)="goToViewProposalsPage()"> View proposals </button> </div> </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
