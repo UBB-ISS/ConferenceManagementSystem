@@ -32,6 +32,36 @@ public class UserController {
         return usersDTO;
     }
 
+    @RequestMapping(value = "/users/{id}")
+    public UserDTO findUserById(@PathVariable("id") int id){
+        return userConverter.convertModelToDTO(userService.findUserById(id));
+    }
+
+    @PostMapping(value = "/users")
+    public void addUser(@RequestBody UserDTO userDTO){
+        var user = userConverter.convertDTOToModel(userDTO);
+        try{
+            userService.addUser(
+                    user.getName(),
+                    user.getEmail(),
+                    user.getUsername(),
+                    user.getWebsite(),
+                    user.getAffiliation(),
+                    user.getPassword()
+            );
+        }
+        catch (CMSException e)
+        {
+            logger.trace(e.toString());
+        }
+    }
+
+    @GetMapping(value = "/user/isExistent/{username}")
+    public boolean isUsernameExistent(@PathVariable("username") String username){
+        return userService.isUsernameExistent(username);
+    }
+
+
     @RequestMapping(value = "/login/{username}/{password}")
     UserDTO login(@PathVariable String username, @PathVariable String password) throws CMSException {
         logger.trace("UserController - login(): method entered -> username = " + username + ", password = " + password);

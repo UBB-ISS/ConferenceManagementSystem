@@ -1,18 +1,18 @@
 package com.iss.cms.web.controller;
 
 import com.iss.cms.core.domain.AppUser;
+import com.iss.cms.core.domain.Conference;
 import com.iss.cms.core.domain.UserConference;
+import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.service.UserConferenceService;
+import com.iss.cms.web.converter.ConferenceConverter;
 import com.iss.cms.web.converter.UserConferenceConverter;
 import com.iss.cms.web.converter.UserConverter;
-import com.iss.cms.web.dto.UserConferencesDTO;
-import com.iss.cms.web.dto.UsersDTO;
+import com.iss.cms.web.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +28,9 @@ public class UserConferenceController {
 
     @Autowired
     private UserConverter userConverter;
+
+    @Autowired
+    private ConferenceConverter conferenceConverter;
 
     @RequestMapping(value="/userConferences")
     UserConferencesDTO getAllUserConferences() {
@@ -47,7 +50,28 @@ public class UserConferenceController {
         return usersDTO;
     }
 
+    @RequestMapping(value="/allConferencesFromAGivenUser/{userId}")
+    public ConferencesDTO getAllConferencesFromAGivenUser(@PathVariable("userId") int userId){
+        List<Conference> conferences = userConferenceService.getAllConferencesFromAGivenUser(userId);
+        return new ConferencesDTO(conferenceConverter.convertModelsToDTOs(conferences));
+    }
 
+    @PostMapping(value="/userConferences")
+    public void addUserToConference(@RequestBody UserConferenceDTO userConferenceDTO){
+        UserConference userConference = userConferenceConverter.convertDTOToModel(userConferenceDTO);
+        try{
+
+            userConferenceService.addUserToConference(
+                    userConference.getUserID(),
+                    userConference.getConferenceID(),
+                    userConference.getRole(),
+                    userConference.isPaid());
+        }
+        catch (CMSException e)
+        {
+            logger.trace(e.toString());
+        }
+    }
 
 
 }
