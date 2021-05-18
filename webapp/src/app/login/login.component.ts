@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MOCK_LOGIN } from "../shared/mock-login.service";
 import { User } from "../shared/user.model";
 import { UserService } from "../shared/user.service";
 
@@ -23,16 +22,14 @@ export class LoginComponent implements OnInit {
   }
 
   goToConferences(): void {
+    console.log("login:");
     console.log(this.user);
-    this.router.navigate(['conferences']/*,
-      {
-        queryParams:
-          {
-            username: this.user.username,
-            password: this.user.password,
-            affiliation: this.user.affiliation
-          }
-      }*/).then(_ => {});
+    this.router.navigate(['conferences'], {
+      queryParams: {
+        userId: this.user.id,
+        username: this.user.username
+      }
+    }).then(_ => {});
   }
 
   loginUser(username: string, password: string): void {

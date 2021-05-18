@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { User } from "../shared/user.model";
-import {Conference, Conferences} from "../shared/conference.model";
-import {ConferenceService} from "../shared/conference.service";
-import * as moment from "moment";
+import { Conference } from "../shared/conference.model";
+import { ConferenceService } from "../shared/conference.service";
 
 @Component({
   selector: 'app-conferences',
@@ -13,15 +11,17 @@ import * as moment from "moment";
 })
 export class ConferencesComponent implements OnInit {
   conferences: Array<Conference> = {} as Array<Conference>;
-  user: User = {} as User;
+  id: number = 0;
+  username: string = '';
 
   constructor(private service: ConferenceService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    /*this.user.username = this.route.snapshot.queryParams.username;
-    this.user.password = this.route.snapshot.queryParams.password;
-    this.user.affiliation = this.route.snapshot.queryParams.affiliation;
-    console.log(this.user);*/
+    this.id = this.route.snapshot.queryParams.userId;
+    this.username = this.route.snapshot.queryParams.username;
+    console.log("conferences:");
+    console.log(this.id);
+    console.log(this.username);
     this.getAllConferences();
   }
 
@@ -38,8 +38,14 @@ export class ConferencesComponent implements OnInit {
     this.router.navigate(['submitProposal']).then(_ => {});
   }
 
-  goToRolesPage(): void {
-    this.router.navigate(['roles']).then(_ => {});
+  goToRolesPage(id: number): void {
+    this.router.navigate(['roles'], {
+      queryParams: {
+        userId: this.id,
+        username: this.username,
+        conferenceId: id
+      }
+    }).then(_ => {});
   }
 
   goToViewProposalsPage(): void {

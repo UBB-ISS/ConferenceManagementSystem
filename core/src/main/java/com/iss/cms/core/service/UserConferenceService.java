@@ -55,17 +55,54 @@ public class UserConferenceService implements IUserConferenceService {
     }
 
     @Override
-    public List<Role> getAllRolesForAGivenUser(int userId) {
+    public List<String> getAllRolesForAGivenUser(int userId) {
         logger.trace("UserConferenceService - getAllRolesForAGivenUser: method entered -> userId = " + userId);
 
         List<UserConference> userConferences = userConferenceRepository.findAllByUserID(userId);
 
-        List<Role> roles = new ArrayList<>();
+        List<String> roles = new ArrayList<>();
+        String role = "";
         for(UserConference userConference: userConferences) {
-            roles.add(userConference.getRole());
+            if(userConference.getRole().name().equals("PC_MEMBER")) role = "PC_MEMBER";
+            if(userConference.getRole().name().equals("CHAIR")) role = "CHAIR";
+            if(userConference.getRole().name().equals("CO_CHAIR")) role = "CO_CHAIR";
+            if(userConference.getRole().name().equals("SESSION_CHAIR")) role = "SESSION_CHAIR";
+            if(userConference.getRole().name().equals("REVIEWER")) role = "REVIEWER";
+            if(userConference.getRole().name().equals("SPEAKER")) role = "SPEAKER";
+            if(userConference.getRole().name().equals("LISTENER")) role = "LISTENER";
+            if(userConference.getRole().name().equals("AUTHOR")) role = "AUTHOR";
+
+            roles.add(role);
         }
 
         logger.trace("UserConferenceService - getAllRolesForAGivenUser: method finished -> " + roles.toString());
+        return roles;
+    }
+
+    @Override
+    public List<String> getAllRolesForAGivenUserInAGivenConference(int userId, int conferenceId) {
+        logger.trace("UserConferenceService - getAllRolesForAGivenUserInAGivenConference: method entered");
+
+        List<UserConference> userConferences = userConferenceRepository.findAllByConferenceID(conferenceId);
+
+        List<String> roles = new ArrayList<>();
+        String role = "";
+        for(UserConference userConference: userConferences) {
+            if(userConference.getUserID() == userId) {
+                if(userConference.getRole().name().equals("PC_MEMBER")) role = "PC_MEMBER";
+                if(userConference.getRole().name().equals("CHAIR")) role = "CHAIR";
+                if(userConference.getRole().name().equals("CO_CHAIR")) role = "CO_CHAIR";
+                if(userConference.getRole().name().equals("SESSION_CHAIR")) role = "SESSION_CHAIR";
+                if(userConference.getRole().name().equals("REVIEWER")) role = "REVIEWER";
+                if(userConference.getRole().name().equals("SPEAKER")) role = "SPEAKER";
+                if(userConference.getRole().name().equals("LISTENER")) role = "LISTENER";
+                if(userConference.getRole().name().equals("AUTHOR")) role = "AUTHOR";
+
+                roles.add(role);
+            }
+        }
+
+        logger.trace("UserConferenceService - getAllRolesForAGivenUserInAGivenConference: method finished");
         return roles;
     }
 }

@@ -1,0 +1,31 @@
+.wrapper {
+  height: 80%;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 10% 10% 50% 20% 10%;
+  grid-template-areas:
+  ". . a . ."
+  ". . a . ."
+  ". b b b ."
+  ". c c c ."
+  ". . . . .";
+  text-align: center;
+}
+
+.item1 {
+  grid-area: a;
+}
+
+.item2 {
+  grid-area: b;
+}
+
+.item3 {
+  grid-area: c;
+}
+
+button {
+  margin-top: 10px;
+}
+
+

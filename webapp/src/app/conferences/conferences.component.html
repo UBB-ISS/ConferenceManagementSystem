@@ -20,7 +20,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let conference of conferences" (dblclick)="goToRolesPage()">
+        <tr *ngFor="let conference of conferences" (dblclick)="goToRolesPage(conference.id)">
           <td> {{conference.name}} </td>
           <td> {{conference.entryFee}} </td>
           <td> {{dateOf(conference.date)}}</td>
@@ -32,24 +32,6 @@
           </td>
         </tr>
       </tbody>
-
-      <!--<tbody>
-      <tr (dblclick)="goToRolesPage()">
-        <td> John </td>
-        <td> 100 </td>
-        <td> 2020/11/12 </td>
-        <td> <div class="buttons"> <button class="btn btn-secondary" (click)="goToSubmitProposalPage()"> Create a proposal </button>
-          <button class="btn btn-secondary" (click)="goToViewProposalsPage()"> View proposals </button> </div> </td>
-      </tr>
-
-      <tr (dblclick)="goToRolesPage()">
-        <td> Jack </td>
-        <td> 50 </td>
-        <td> 2021/01/12 </td>
-        <td> <div class="buttons"> <button class="btn btn-secondary" (click)="goToSubmitProposalPage()"> Create a proposal </button>
-          <button class="btn btn-secondary" (click)="goToViewProposalsPage()"> View proposals </button> </div> </td>
-      </tr>
-      </tbody>-->
     </table>
   </div>
 </div>

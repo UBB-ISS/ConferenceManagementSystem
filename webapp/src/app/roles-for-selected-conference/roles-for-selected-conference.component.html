@@ -1,1 +1,27 @@
-<p>roles-for-selected-conference works!</p>
+<div class="wrapper">
+  <div class="item1">
+    <h2>Welcome, {{this.username}}!</h2>
+    <p> There are your roles: </p>
+  </div>
+
+  <div class="item2">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let role of roles">
+          <td>{{role}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="item3">
+    <label class="form-label" for="role"> You can choose another role: </label>
+    <input class="form-control" type="text" id="role" autocomplete="off" #role>
+    <button class="btn btn-secondary"> Add role </button>
+  </div>
+</div>

@@ -13,5 +13,7 @@ public interface IUserConferenceService {
 
     void addUserToConference(int userId, int conferenceId, Role role, boolean paid);
 
-    List<Role> getAllRolesForAGivenUser(int userId);
+    List<String> getAllRolesForAGivenUser(int userId);
+
+    List<String> getAllRolesForAGivenUserInAGivenConference(int userId, int conferenceId);
 }

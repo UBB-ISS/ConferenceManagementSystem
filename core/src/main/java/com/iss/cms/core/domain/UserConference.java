@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -21,6 +19,7 @@ public class UserConference implements Serializable {
     private int conferenceID;
     // private int conferenceSectionID;
     private int userID;
+    @Enumerated(EnumType.STRING)
     private Role role;
     // private int paperID;
     private boolean paid;

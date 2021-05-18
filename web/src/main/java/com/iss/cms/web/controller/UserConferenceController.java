@@ -47,7 +47,19 @@ public class UserConferenceController {
         return usersDTO;
     }
 
+    @RequestMapping(value="/allRolesForAGivenUser/{userId}")
+    List<String>  getAllRolesForAGivenUser(@PathVariable int userId) {
+        logger.trace("UserConferenceController - getAllRolesForAGivenUser: method entered -> userId = " + userId);
+        List<String> roles = this.userConferenceService.getAllRolesForAGivenUser(userId);
+        logger.trace("UserConferenceController - getAllRolesForAGivenUser: method finished -> " + roles.toString());
+        return roles;
+    }
 
-
-
+    @RequestMapping(value="/allRolesForAGivenUserInAGivenConference/{userId}/{conferenceId}")
+    List<String>  getAllRolesForAGivenUserInAGivenConference(@PathVariable int userId, @PathVariable int conferenceId) {
+        logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method entered");
+        List<String> roles = this.userConferenceService.getAllRolesForAGivenUserInAGivenConference(userId, conferenceId);
+        logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method finished");
+        return roles;
+    }
 }
