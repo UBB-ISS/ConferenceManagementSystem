@@ -40,13 +40,14 @@ public class UserService implements IUserService {
             }
         }
 
-        if(!ok) {
-            /*appUser = null;*/
+        /*if(!ok) {
+            *//*appUser = null;*//*
             logger.trace("UserService: The user does not exist!");
             throw new CMSException("The user does not exist!");
-        }
+        }*/
+        if(!ok) appUser = null;
 
-        logger.trace("UserService - login(): method finished -> " + appUser.toString());
+        logger.trace("UserService - login(): method finished");
 
         return appUser;
     }
@@ -66,7 +67,8 @@ public class UserService implements IUserService {
         }
 
         AppUser appUser = new AppUser(name, email, username, website, affiliation, password);
-        userRepository.save(new AppUser(name, email, username, website, affiliation, password));
+        System.out.println(appUser.toString());
+        userRepository.save(appUser);
 
         logger.trace("UserService - createAccount(): method finished -> " + appUser.toString());
     }

@@ -19,9 +19,9 @@ public class UserConference implements Serializable {
     private int id;
 
     private int conferenceID;
-    private int conferenceSectionID;
+    // private int conferenceSectionID;
     private int userID;
     private Role role;
-    private int paperID;
+    // private int paperID;
     private boolean paid;
 }

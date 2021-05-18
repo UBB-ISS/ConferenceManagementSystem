@@ -36,15 +36,18 @@ public class UserController {
     UserDTO login(@PathVariable String username, @PathVariable String password) throws CMSException {
         logger.trace("UserController - login(): method entered -> username = " + username + ", password = " + password);
         AppUser appUser = userService.login(username, password);
-        UserDTO userDTO = userConverter.convertModelToDTO(appUser);
+        UserDTO userDTO;
+        if(appUser == null) userDTO = null;
+        else userDTO = userConverter.convertModelToDTO(appUser);
 
-        logger.trace("UserController - login(): method finished -> " + userDTO.toString());
+        logger.trace("UserController - login(): method finished");
         return userDTO;
     }
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
     void createAccount(@RequestBody UserDTO userDTO) throws CMSException {
         logger.trace("UserController - createAccount(): method entered -> " + userDTO.toString());
+        System.out.println(userDTO.toString());
 
         AppUser appUser = userConverter.convertDTOToModel(userDTO);
         userService.createAccount(appUser.getName(), appUser.getEmail(), appUser.getUsername(), appUser.getWebsite(), appUser.getAffiliation(), appUser.getPassword());

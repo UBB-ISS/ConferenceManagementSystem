@@ -19,5 +19,11 @@ public class Paper implements Serializable {
     private int id;
 
     private int authorId;
-    private String name;
+    private int userConferenceId;
+    private String title;
+    private String keywords;
+    private String paperText;
+    private String abstractText;
+    private boolean finalized;
+    private boolean accepted;
 }

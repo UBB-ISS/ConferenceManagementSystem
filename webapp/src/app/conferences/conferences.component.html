@@ -3,30 +3,37 @@
     <h2> Conferences </h2>
   </div>
 
-  <div class="item3" *ngIf="user.affiliation == 'admin'">
-    <button class="btn btn-secondary"> Add Conference </button>
-    <button class="btn btn-secondary"> Set Deadlines </button>
-  </div>
+  <!--  <div class="item3" *ngIf="user.affiliation == 'admin'">
+      <button class="btn btn-secondary"> Add Conference </button>
+      <button class="btn btn-secondary"> Set Deadlines </button>
+    </div>-->
 
   <div class="item2">
     <table class="table table-striped">
       <thead>
-      <tr>
-        <th> Name </th>
-        <th> Price </th>
-        <th> Date </th>
-        <th>  </th>
-      </tr>
+        <tr>
+          <th> Name</th>
+          <th> Price</th>
+          <th> Date</th>
+          <th></th>
+        </tr>
       </thead>
 
-      <!--<tr *ngFor="let conference in conferences" (dblclick)="goToRolesPage()">
-        <td> {{conference.name}} </td>
-        <td> {{conference.price}} </td>
-        <td> {{conference.date}}} </td>
-        <td> <div class="buttons"> <button class="buttons" (click)=""> Create a proposal </button>
-             <button class="btn btn-secondary" (click)="goToViewProposalsPage()"> View proposals </button> </div> </td>
-      </tr>-->
       <tbody>
+        <tr *ngFor="let conference of conferences" (dblclick)="goToRolesPage()">
+          <td> {{conference.name}} </td>
+          <td> {{conference.entryFee}} </td>
+          <td> {{dateOf(conference.date)}}</td>
+          <td>
+            <div class="buttons">
+              <button class="buttons" (click)="goToSubmitProposalPage()"> Create a proposal</button>
+              <button class="btn btn-secondary" (click)="goToViewProposalsPage()"> View proposals</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+      <!--<tbody>
       <tr (dblclick)="goToRolesPage()">
         <td> John </td>
         <td> 100 </td>
@@ -42,7 +49,7 @@
         <td> <div class="buttons"> <button class="btn btn-secondary" (click)="goToSubmitProposalPage()"> Create a proposal </button>
           <button class="btn btn-secondary" (click)="goToViewProposalsPage()"> View proposals </button> </div> </td>
       </tr>
-      </tbody>
+      </tbody>-->
     </table>
   </div>
 </div>

@@ -13,13 +13,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PaperReview implements Serializable {
+public class ReviewerPaper implements Serializable {
     @Id
     @GeneratedValue
     private int id;
 
-    private int reviewerId;
+    private int userId;
     private int paperId;
-    private String review;
-    private Qualifier qualifier;
+    private boolean assigned;
+    private Availability availability;
 }

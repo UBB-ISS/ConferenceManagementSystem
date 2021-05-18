@@ -1,4 +1,4 @@
-<form>
+<div class="form">
   <div class="panel panel-info">
     <div class="panel-heading">
       <h1 class="panel-title"> Create Account </h1>
@@ -7,42 +7,42 @@
     <div class="panel-body">
       <div class="form-group">
         <label class="form-label" for="full-name"> Full Name </label>
-        <input class="form-control" type="text" id="full-name" autocomplete="off">
+        <input class="form-control" type="text" id="full-name" autocomplete="off" #fullname>
       </div>
 
       <div class="form-group">
         <label class="form-label" for="email"> Email </label>
-        <input class="form-control" type="email" id="email" autocomplete="off">
+        <input class="form-control" type="email" id="email" autocomplete="off" #email>
       </div>
 
       <div class="form-group">
         <label class="form-label" for="affiliation"> Affiliation </label>
-        <input class="form-control" type="text" id="affiliation" autocomplete="off">
+        <input class="form-control" type="text" id="affiliation" autocomplete="off" #affiliation>
       </div>
 
       <div class="form-group">
         <label class="form-label" for="website"> Personal Website </label>
-        <input class="form-control" type="text" id="website" autocomplete="off">
+        <input class="form-control" type="text" id="website" autocomplete="off" #website>
       </div>
 
       <div class="form-group">
         <label class="form-label" for="username"> Username </label>
-        <input class="form-control" type="text" id="username" autocomplete="off">
+        <input class="form-control" type="text" id="username" autocomplete="off" #username>
       </div>
 
       <div class="form-group">
         <label class="form-label" for="password"> Password </label>
-        <input class="form-control" type="password" id="password" autocomplete="off">
+        <input class="form-control" type="password" id="password" autocomplete="off" #password>
       </div>
 
       <div class="form-group">
         <label class="form-label" for="check-password"> Check Password </label>
-        <input class="form-control" type="text" id="check-password" autocomplete="off">
+        <input class="form-control" type="text" id="check-password" autocomplete="off" #check_password>
       </div>
     </div>
 
     <div class="panel-footer">
-      <button class="btn btn-info" (click)="goToConferences()"> Create Account </button>
+      <button class="btn btn-info" (click)="createAccount(fullname.value, email.value, affiliation.value, website.value, username.value, password.value)"> Create Account </button>
     </div>
   </div>
-</form>
+</div>

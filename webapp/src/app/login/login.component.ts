@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   goToConferences(): void {
     console.log(this.user);
-    this.router.navigate(['conferences'],
+    this.router.navigate(['conferences']/*,
       {
         queryParams:
           {
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
             password: this.user.password,
             affiliation: this.user.affiliation
           }
-      }).then(_ => {});
+      }*/).then(_ => {});
   }
 
   loginUser(username: string, password: string): void {
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         if(user != null) {
           this.user = user;
           this.goToConferences();
-        }
+        } else window.alert("This user does not exist!");
       }
     );
   }
