@@ -3,6 +3,7 @@ package com.iss.cms.core.service;
 import com.iss.cms.core.domain.AppUser;
 import com.iss.cms.core.domain.Role;
 import com.iss.cms.core.domain.UserConference;
+import com.iss.cms.core.exceptions.CMSException;
 
 import java.util.List;
 
@@ -11,7 +12,9 @@ public interface IUserConferenceService {
 
     List<AppUser> getAllUsersFromAGivenConference(int conferenceId);
 
-    void addUserToConference(int userId, int conferenceId, Role role, boolean paid);
+    void addUserToConference(int userId, int conferenceId, Role role, boolean paid) throws CMSException;
 
     List<Role> getAllRolesForAGivenUser(int userId);
+
+    void payFeeForUser(int userId, int conferenceId);
 }

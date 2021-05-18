@@ -22,4 +22,11 @@ public class PaperReview implements Serializable {
     private int paperId;
     private String review;
     private Qualifier qualifier;
+
+    public PaperReview(int reviewerId, int paperId, String review, Qualifier qualifier) {
+        this.reviewerId = reviewerId;
+        this.paperId = paperId;
+        this.review = review;
+        this.qualifier = qualifier;
+    }
 }
