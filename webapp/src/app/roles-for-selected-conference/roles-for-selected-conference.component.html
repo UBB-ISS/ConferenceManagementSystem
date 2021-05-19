@@ -20,8 +20,16 @@
   </div>
 
   <div class="item3">
-    <label class="form-label" for="role"> You can choose another role: </label>
-    <input class="form-control" type="text" id="role" autocomplete="off" #role>
-    <button class="btn btn-secondary"> Add role </button>
+    <button class="btn btn-secondary" (click)="goToConferencesPage()"> Go Back </button>
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <b> You can choose another role </b>
+        <span class="caret"></span> </button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let role of allPossibleRoles">
+          <a (click)="verify(role)"> {{role}} </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

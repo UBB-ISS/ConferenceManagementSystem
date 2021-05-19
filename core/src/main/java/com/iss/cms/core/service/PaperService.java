@@ -95,4 +95,28 @@ public class PaperService implements IPaperService{
         logger.trace("PaperService - getPapersOfAUserInAConference: method finished");
         return papers;
     }
+
+    @Override
+    public List<Paper> getFinalPapersFromAConference(int conferenceId) {
+        logger.trace("PaperService - getFinalPapersFromAConference: method entered");
+
+        List<Integer> userConferenceIds = new ArrayList<>();
+        for(UserConference userConference: userConferenceRepository.findAll()) {
+            if(userConference.getConferenceID() == conferenceId) {
+                userConferenceIds.add(userConference.getId());
+            }
+        }
+
+        List<Paper> papers = new ArrayList<>();
+        for(int id: userConferenceIds) {
+            for(Paper paper: paperRepository.findAll()) {
+                if(paper.getUserConferenceId() == id && paper.isFinalized()) {
+                    papers.add(paper);
+                }
+            }
+        }
+
+        logger.trace("PaperService - getFinalPapersFromAConference: method finished");
+        return papers;
+    }
 }

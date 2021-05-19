@@ -12,6 +12,7 @@ import { ViewProposalsComponent } from './view-proposals/view-proposals.componen
 import { RolesForSelectedConferenceComponent } from './roles-for-selected-conference/roles-for-selected-conference.component';
 import { UpdateProposalComponent } from './update-proposal/update-proposal.component';
 import { RoleComponent } from './role/role.component';
+import { BidProposalComponent } from './bid-proposal/bid-proposal.component';
 
 import { UserService } from "./shared/user.service";
 import { ConferenceService } from "./shared/conference.service";
@@ -27,7 +28,8 @@ import { PaperService } from "./shared/paper.service";
     ViewProposalsComponent,
     RolesForSelectedConferenceComponent,
     UpdateProposalComponent,
-    RoleComponent
+    RoleComponent,
+    BidProposalComponent
   ],
   imports: [
     BrowserModule,

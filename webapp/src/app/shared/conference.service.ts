@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { Conferences } from "./conference.model";
+import { Conference, Conferences } from "./conference.model";
 
 @Injectable()
 export class ConferenceService {
@@ -13,5 +13,9 @@ export class ConferenceService {
 
   getAllConferences(): Observable<Conferences> {
     return this.httpClient.get<Conferences>(this.url + `conferences`);
+  }
+
+  getConferenceById(conferenceId: number): Observable<Conference> {
+    return this.httpClient.get<Conference>(this.url + `conference/${conferenceId}`);
   }
 }

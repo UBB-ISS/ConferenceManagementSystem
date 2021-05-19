@@ -63,4 +63,15 @@ public class PaperController {
         logger.trace("PaperController - getPapersOfAUserInAConference(): method finished");
         return papersDTO;
     }
+
+    @RequestMapping(value="/finalPapersFromAConference/{conferenceId}")
+    public PapersDTO getFinalPapersFromAConference(@PathVariable int conferenceId) {
+        logger.trace("PaperController - getFinalPapersFromAConference(): method entered");
+
+        List<Paper> papers = paperService.getFinalPapersFromAConference(conferenceId);
+        PapersDTO papersDTO = new PapersDTO(paperConverter.convertModelsToDTOs(papers));
+
+        logger.trace("PaperController - getFinalPapersFromAConference(): method finished");
+        return papersDTO;
+    }
 }

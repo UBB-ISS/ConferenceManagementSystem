@@ -45,6 +45,6 @@ export class ConferencesComponent implements OnInit {
   }
 
   dateOf(date: any) {
-    return `${date.year}-${date.monthValue}-${date.dayOfMonth}`;
+    return `${date.monthValue}/${date.dayOfMonth}/${date.year}`;
   }
 }

@@ -6,6 +6,7 @@
 
     <div class="author_item2">
       <button class="btn btn-secondary" (click)="goToCreateProposalPage()"> Create paper </button>
+      <button class="btn btn-secondary" (click)="goToRolesPage()"> Go Back </button>
     </div>
 
     <div class="author_item3">
@@ -30,10 +31,44 @@
           <td> {{paper.keywords}} </td>
           <td> {{paper.finalized}} </td>
           <td> {{paper.accepted}} </td>
-          <td> <button class="btn btn-secondary" (click)="goToUpdateProposalPage(paper.id)"> Update paper </button> </td>
+          <td> <button class="btn btn-secondary" (click)="goToUpdateProposalPage(paper.id)"
+                [disabled]="paper.finalized || paper.accepted"> Update paper </button> </td>
         </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div *ngIf="role === 'REVIEWER'" class="reviewer">
+    <div class="reviewer_item1">
+      <h2> Final Papers </h2>
+      <p> You can select to review or not the following papers: </p>
+    </div>
+
+    <div class="reviewer_item2">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th> Title </th>
+          <th> Finalized </th>
+          <th> Accepted </th>
+          <th> >< </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let paper of finalPapersFromAConference">
+          <td> {{paper.title}} </td>
+          <td> {{paper.finalized}} </td>
+          <td> {{paper.accepted}} </td>
+          <td> <button class="btn btn-secondary" (click)="goToBidPaperPage(paper.id)"> Bid paper </button> </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="reviewer_item3">
+      <button class="btn btn-secondary" (click)="goToReviewPapersPage()"> Review assigned papers </button>
+      <button class="btn btn-secondary" (click)="goToRolesPage()"> Go Back </button>
     </div>
   </div>
 </div>

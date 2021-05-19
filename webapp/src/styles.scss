@@ -12,3 +12,10 @@ app-login, app-create-account, app-submit-proposal, app-update-proposal {
   justify-content: center;
   align-items: center;
 }
+
+app-bid-proposal {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

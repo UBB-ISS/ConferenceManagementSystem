@@ -15,7 +15,9 @@
           <th> Name</th>
           <th> Price</th>
           <th> Date</th>
-          <th></th>
+          <th> Bidding Phase Deadline </th>
+          <th> Submit Phase Deadline </th>
+          <th> Review Phase Deadline </th>
         </tr>
       </thead>
 
@@ -24,6 +26,9 @@
           <td> {{conference.name}} </td>
           <td> {{conference.entryFee}} </td>
           <td> {{dateOf(conference.date)}}</td>
+          <td> {{dateOf(conference.biddingPhaseDeadline)}} </td>
+          <td> {{dateOf(conference.submitPaperDeadline)}} </td>
+          <td> {{dateOf(conference.reviewPaperDeadline)}} </td>
         </tr>
       </tbody>
     </table>

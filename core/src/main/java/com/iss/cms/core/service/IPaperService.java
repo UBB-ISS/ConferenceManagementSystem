@@ -20,4 +20,6 @@ public interface IPaperService {
             boolean accepted) throws CMSException;
 
     List<Paper> getPapersOfAUserInAConference(int userId, int conferenceId);
+
+    List<Paper> getFinalPapersFromAConference(int conferenceId);
 }
