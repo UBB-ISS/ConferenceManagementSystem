@@ -12,7 +12,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let role of roles">
+        <tr *ngFor="let role of roles" (dblclick)="goToRolePage(role)">
           <td>{{role}}</td>
         </tr>
       </tbody>

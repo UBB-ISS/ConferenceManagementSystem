@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <div *ngIf="role === 'AUTHOR'" class="author">
+    <div class="author_item1">
+      <h2> Papers </h2>
+    </div>
+
+    <div class="author_item2">
+      <button class="btn btn-secondary" (click)="goToCreateProposalPage()"> Create paper </button>
+    </div>
+
+    <div class="author_item3">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th> Title </th>
+          <th> PaperText </th>
+          <th> AbstractText </th>
+          <th> Keywords </th>
+          <th> Finalized </th>
+          <th> Accepted </th>
+          <th> >< </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let paper of papers">
+          <td> {{paper.title}} </td>
+          <td> {{paper.paperText}} </td>
+          <td> {{paper.abstractText}} </td>
+          <td> {{paper.keywords}} </td>
+          <td> {{paper.finalized}} </td>
+          <td> {{paper.accepted}} </td>
+          <td> <button class="btn btn-secondary" (click)="goToUpdateProposalPage(paper.id)"> Update paper </button> </td>>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

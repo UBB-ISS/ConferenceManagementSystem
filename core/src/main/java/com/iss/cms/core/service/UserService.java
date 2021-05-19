@@ -80,9 +80,13 @@ public class UserService implements IUserService {
         }
 
         AppUser appUser = new AppUser(name, email, username, website, affiliation, password);
-        System.out.println(appUser.toString());
         userRepository.save(appUser);
 
         logger.trace("UserService - createAccount(): method finished -> " + appUser.toString());
+    }
+
+    @Override
+    public boolean isUsernameExistent(String username) {
+        return false;
     }
 }

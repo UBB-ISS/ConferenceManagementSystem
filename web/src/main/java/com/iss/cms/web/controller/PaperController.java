@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PaperController {
     private static final Logger logger = LoggerFactory.getLogger(PaperController.class);
@@ -49,5 +51,16 @@ public class PaperController {
         {
             logger.trace(e.toString());
         }
+    }
+
+    @RequestMapping(value="/papersOfAUserInAConference/{userId}/{conferenceId}")
+    public PapersDTO getPapersOfAUserInAConference(@PathVariable int userId, @PathVariable int conferenceId) {
+        logger.trace("PaperController - getPapersOfAUserInAConference(): method entered");
+
+        List<Paper> papers = paperService.getPapersOfAUserInAConference(userId, conferenceId);
+        PapersDTO papersDTO = new PapersDTO(paperConverter.convertModelsToDTOs(papers));
+
+        logger.trace("PaperController - getPapersOfAUserInAConference(): method finished");
+        return papersDTO;
     }
 }

@@ -57,10 +57,10 @@ public class UserController {
     @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
     void createAccount(@RequestBody UserDTO userDTO) throws CMSException {
         logger.trace("UserController - createAccount(): method entered -> " + userDTO.toString());
-        System.out.println(userDTO.toString());
 
         AppUser appUser = userConverter.convertDTOToModel(userDTO);
-        userService.createAccount(appUser.getName(), appUser.getEmail(), appUser.getUsername(), appUser.getWebsite(), appUser.getAffiliation(), appUser.getPassword());
+        userService.createAccount(appUser.getName(), appUser.getEmail(),
+                appUser.getUsername(), appUser.getWebsite(), appUser.getAffiliation(), appUser.getPassword());
 
         logger.trace("UserController - createAccount(): method finished");
     }

@@ -34,9 +34,9 @@ export class ConferencesComponent implements OnInit {
     );
   }
 
-  goToSubmitProposalPage(): void {
+/*  goToSubmitProposalPage(): void {
     this.router.navigate(['submitProposal']).then(_ => {});
-  }
+  }*/
 
   goToRolesPage(id: number): void {
     this.router.navigate(['roles'], {
@@ -48,9 +48,11 @@ export class ConferencesComponent implements OnInit {
     }).then(_ => {});
   }
 
+/*
   goToViewProposalsPage(): void {
     this.router.navigate(['viewProposals']).then(_ => {});
   }
+*/
 
   dateOf(date: any) {
     return `${date.year}-${date.monthValue}-${date.dayOfMonth}`;

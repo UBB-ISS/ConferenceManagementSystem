@@ -1,20 +1,5 @@
-/*
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  affiliation: string;
-  website: string;
-  username: string;
-  password: string;
-}
-
-export interface Users {
-  usersDTO: Array<User>;
-}
-*/
 export class User {
-  id: number = 0;
+  id: number = 1;
   name: string;
   email: string;
   affiliation: string;

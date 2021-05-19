@@ -141,4 +141,9 @@ public class UserConferenceService implements IUserConferenceService {
         }
         logger.trace("UserConferenceService - payFeeForUser(): method entered");
     }
+
+    @Override
+    public List<Conference> getAllConferencesFromAGivenUser(int userId) {
+        return null;
+    }
 }

@@ -18,4 +18,6 @@ public interface IPaperService {
             String abstractText,
             boolean finalized,
             boolean accepted) throws CMSException;
+
+    List<Paper> getPapersOfAUserInAConference(int userId, int conferenceId);
 }

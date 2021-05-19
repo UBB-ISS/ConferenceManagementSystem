@@ -42,4 +42,15 @@ export class RolesForSelectedConferenceComponent implements OnInit {
         this.router.navigate(['roles']).then(_ => {});
       });
   }
+
+  goToRolePage(role: string) {
+    this.router.navigate(['role'], {
+      queryParams: {
+        userId: this.userId,
+        conferenceId: this.conferenceId,
+        role: role,
+        username: this.username
+      }
+    }).then(_ => {});
+  }
 }

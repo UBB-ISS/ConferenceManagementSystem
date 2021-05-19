@@ -1,6 +1,7 @@
 package com.iss.cms.core.service;
 
 import com.iss.cms.core.domain.AppUser;
+import com.iss.cms.core.domain.Conference;
 import com.iss.cms.core.domain.Role;
 import com.iss.cms.core.domain.UserConference;
 import com.iss.cms.core.exceptions.CMSException;
@@ -19,4 +20,6 @@ public interface IUserConferenceService {
     List<String> getAllRolesForAGivenUserInAGivenConference(int userId, int conferenceId);
     
     void payFeeForUser(int userId, int conferenceId);
+
+    List<Conference> getAllConferencesFromAGivenUser(int userId);
 }

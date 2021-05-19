@@ -14,4 +14,6 @@ public interface IUserService {
                        String affiliation, String password) throws CMSException;
 
     AppUser login(String username, String password) throws CMSException;
+
+    boolean isUsernameExistent(String username);
 }

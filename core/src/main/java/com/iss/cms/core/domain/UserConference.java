@@ -17,11 +17,9 @@ public class UserConference implements Serializable {
     private int id;
 
     private int conferenceID;
-    // private int conferenceSectionID;
     private int userID;
     @Enumerated(EnumType.STRING)
     private Role role;
-    // private int paperID;
     private boolean paid;
 
     public UserConference(int userId, int conferenceId, Role role, boolean paid) {

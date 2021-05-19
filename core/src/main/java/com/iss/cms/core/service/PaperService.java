@@ -1,6 +1,7 @@
 package com.iss.cms.core.service;
 
 import com.iss.cms.core.domain.Paper;
+import com.iss.cms.core.domain.Role;
 import com.iss.cms.core.domain.UserConference;
 import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.repository.PaperRepository;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,5 +68,28 @@ public class PaperService implements IPaperService{
         paperRepository.save(paper);
 
         logger.trace("PaperService - addPaper: method finished");
+    }
+
+    @Override
+    public List<Paper> getPapersOfAUserInAConference(int userId, int conferenceId) {
+        logger.trace("PaperService - getPapersOfAUserInAConference: method entered");
+
+        int userConferenceId = 0;
+        for(UserConference userConference: userConferenceRepository.findAll()) {
+            if(userConference.getUserID() == userId && userConference.getConferenceID() == conferenceId
+                    && userConference.getRole() == Role.AUTHOR) {
+                userConferenceId = userConference.getId();
+            }
+        }
+
+        List<Paper> papers = new ArrayList<>();
+        for(Paper paper: paperRepository.findAll()) {
+            if(paper.getUserConferenceId() == userConferenceId) {
+                papers.add(paper);
+            }
+        }
+
+        logger.trace("PaperService - getPapersOfAUserInAConference: method finished");
+        return papers;
     }
 }

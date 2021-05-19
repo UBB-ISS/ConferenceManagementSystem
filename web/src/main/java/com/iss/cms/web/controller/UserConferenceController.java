@@ -70,7 +70,7 @@ public class UserConferenceController {
         return roles;
     }
     
-    @PostMapping(value="/userConferences")
+    @RequestMapping(value="/userConferences", method=RequestMethod.POST)
     public void addUserToConference(@RequestBody UserConferenceDTO userConferenceDTO){
         UserConference userConference = userConferenceConverter.convertDTOToModel(userConferenceDTO);
         try{

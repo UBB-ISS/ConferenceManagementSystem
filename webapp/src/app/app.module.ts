@@ -11,9 +11,11 @@ import { SubmitProposalComponent } from './submit-proposal/submit-proposal.compo
 import { ViewProposalsComponent } from './view-proposals/view-proposals.component';
 import { RolesForSelectedConferenceComponent } from './roles-for-selected-conference/roles-for-selected-conference.component';
 import { UpdateProposalComponent } from './update-proposal/update-proposal.component';
+import { RoleComponent } from './role/role.component';
 
 import { UserService } from "./shared/user.service";
 import { ConferenceService } from "./shared/conference.service";
+import { PaperService } from "./shared/paper.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { ConferenceService } from "./shared/conference.service";
     SubmitProposalComponent,
     ViewProposalsComponent,
     RolesForSelectedConferenceComponent,
-    UpdateProposalComponent
+    UpdateProposalComponent,
+    RoleComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { ConferenceService } from "./shared/conference.service";
     HttpClientModule
   ],
   providers: [UserService,
-              ConferenceService
+              ConferenceService,
+              PaperService
              ],
   bootstrap: [AppComponent]
 })
