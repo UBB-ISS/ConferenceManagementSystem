@@ -22,4 +22,16 @@ export class UserService {
   createAccount(name: string, email: string, affiliation: string, website: string, username: string, password: string): Observable<any> {
     return this.httpClient.post(this.url + `createAccount`, new User(name, email, affiliation, website, username, password));
   }
+
+  getAllRolesForAGivenUser(id: number): Observable<Array<string>> {
+    return this.httpClient.get<Array<string>>(this.url + `allRolesForAGivenUser/${id}`);
+  }
+
+  getAllRolesForAGivenUserInAGivenConference(userId: number, conferenceId: number): Observable<Array<string>> {
+    return this.httpClient.get<Array<string>>(this.url + `allRolesForAGivenUserInAGivenConference/${userId}/${conferenceId}`);
+  }
+
+  addUserToConference(userId: number, conferenceId: number, paid: boolean, role: string): Observable<any> {
+    return this.httpClient.post(this.url + `addUserToConference`);
+  }
 }

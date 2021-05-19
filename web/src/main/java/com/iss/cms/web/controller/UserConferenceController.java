@@ -9,9 +9,14 @@ import com.iss.cms.web.converter.ConferenceConverter;
 import com.iss.cms.web.converter.UserConferenceConverter;
 import com.iss.cms.web.converter.UserConverter;
 import com.iss.cms.web.dto.*;
+import com.iss.cms.web.dto.UserConferencesDTO;
+import com.iss.cms.web.dto.UsersDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,6 +61,15 @@ public class UserConferenceController {
         return new ConferencesDTO(conferenceConverter.convertModelsToDTOs(conferences));
     }
 
+    
+    @RequestMapping(value="/allRolesForAGivenUser/{userId}")
+    List<String>  getAllRolesForAGivenUser(@PathVariable int userId) {
+        logger.trace("UserConferenceController - getAllRolesForAGivenUser: method entered -> userId = " + userId);
+        List<String> roles = this.userConferenceService.getAllRolesForAGivenUser(userId);
+        logger.trace("UserConferenceController - getAllRolesForAGivenUser: method finished -> " + roles.toString());
+        return roles;
+    }
+    
     @PostMapping(value="/userConferences")
     public void addUserToConference(@RequestBody UserConferenceDTO userConferenceDTO){
         UserConference userConference = userConferenceConverter.convertDTOToModel(userConferenceDTO);
@@ -72,6 +86,13 @@ public class UserConferenceController {
             logger.trace(e.toString());
         }
     }
-
+    @RequestMapping(value="/allRolesForAGivenUserInAGivenConference/{userId}/{conferenceId}")
+    List<String>  getAllRolesForAGivenUserInAGivenConference(@PathVariable int userId, @PathVariable int conferenceId) {
+        logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method entered");
+        List<String> roles = this.userConferenceService.getAllRolesForAGivenUserInAGivenConference(userId, conferenceId);
+        logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method finished");
+        return roles;
+    }
+       
 
 }
