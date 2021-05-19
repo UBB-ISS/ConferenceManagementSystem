@@ -1,5 +1,6 @@
 package com.iss.cms.web.controller;
 
+import com.iss.cms.core.service.IPaperService;
 import com.iss.cms.web.converter.PaperConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

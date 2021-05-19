@@ -23,4 +23,11 @@ public class UserConference implements Serializable {
     private Role role;
     // private int paperID;
     private boolean paid;
+
+    public UserConference(int userId, int conferenceId, Role role, boolean paid) {
+        this.userID = userId;
+        this.conferenceID = conferenceId;
+        this.role = role;
+        this.paid = paid;
+    }
 }

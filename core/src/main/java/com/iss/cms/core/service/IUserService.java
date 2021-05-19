@@ -8,6 +8,8 @@ import java.util.List;
 public interface IUserService {
     List<AppUser> getAllUsers();
 
+    AppUser findUserById(int id) throws CMSException;
+
     void createAccount(String name, String email, String username, String website,
                        String affiliation, String password) throws CMSException;
 

@@ -20,4 +20,9 @@ public class PaperSection implements Serializable {
 
     private int paperId;
     private int sectionId;
+
+    public PaperSection(int paperId, int sectionId) {
+        this.paperId = paperId;
+        this.sectionId = sectionId;
+    }
 }
