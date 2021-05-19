@@ -10,7 +10,6 @@ import lombok.*;
 @ToString
 public class PaperDTO {
     private int id;
-    private int authorId;
     private int userConferenceId;
     private String title;
     private String keywords;

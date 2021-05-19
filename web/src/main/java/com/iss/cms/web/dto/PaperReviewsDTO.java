@@ -11,6 +11,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-public class PapersDTO {
-    private Set<PaperDTO> papersDTO;
+public class PaperReviewsDTO {
+    private Set<PaperReviewDTO> paperReviewsDTO;
 }

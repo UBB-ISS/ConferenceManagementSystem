@@ -30,7 +30,7 @@ public class PaperService implements IPaperService{
     }
 
     @Override
-    public Paper findPaperByID(int id) throws CMSException {
+    public Paper findPaperById(int id) throws CMSException {
         logger.trace("PaperService - findPaperById(): method entered -> id");
         Optional<Paper> paper = paperRepository.findById(id);
         if(paper.isEmpty()) {

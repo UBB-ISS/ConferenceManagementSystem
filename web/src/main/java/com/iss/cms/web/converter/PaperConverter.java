@@ -11,7 +11,6 @@ public class PaperConverter extends BaseConverter<Paper, PaperDTO> {
         Paper model = new Paper();
 
         model.setId(dto.getId());
-        model.setAuthorId(dto.getAuthorId());
         model.setUserConferenceId(dto.getUserConferenceId());
         model.setTitle(dto.getTitle());
         model.setKeywords(dto.getKeywords());
@@ -28,7 +27,6 @@ public class PaperConverter extends BaseConverter<Paper, PaperDTO> {
         PaperDTO dto = new PaperDTO();
 
         dto.setId(model.getId());
-        dto.setAuthorId(model.getAuthorId());
         dto.setUserConferenceId(model.getUserConferenceId());
         dto.setTitle(model.getTitle());
         dto.setKeywords(model.getKeywords());

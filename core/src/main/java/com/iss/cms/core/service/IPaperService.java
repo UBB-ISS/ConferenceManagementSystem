@@ -8,8 +8,14 @@ import java.util.List;
 public interface IPaperService {
     List<Paper> getPapers();
 
-    Paper findPaperByID(int id) throws CMSException;
+    Paper findPaperById(int id) throws CMSException;
 
-    void addPaper(int userConferenceId, String title, String keywords,
-                  String paperText, String abstractText, boolean finalized, boolean accepted) throws CMSException;
+    void addPaper(
+            int userConferenceId,
+            String title,
+            String keywords,
+            String paperText,
+            String abstractText,
+            boolean finalized,
+            boolean accepted) throws CMSException;
 }
