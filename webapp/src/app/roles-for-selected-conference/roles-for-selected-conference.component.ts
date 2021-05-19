@@ -13,6 +13,8 @@ export class RolesForSelectedConferenceComponent implements OnInit {
   conferenceId: number = 0;
   roles: Array<string> = {} as Array<string>;
 
+  allPossibleRoles: Array<string> = ['PC_MEMBER', 'CHAIR', 'CO_CHAIR', 'AUTHOR', 'REVIEWER', 'SESSION_CHAIR', 'SPEAKER', 'LISTENER'];
+
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit(): void {

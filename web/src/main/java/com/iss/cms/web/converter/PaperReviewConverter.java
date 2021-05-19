@@ -2,7 +2,9 @@ package com.iss.cms.web.converter;
 
 import com.iss.cms.core.domain.PaperReview;
 import com.iss.cms.web.dto.PaperReviewDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PaperReviewConverter extends BaseConverter<PaperReview, PaperReviewDTO>{
     @Override
     public PaperReview convertDTOToModel(PaperReviewDTO dto) {

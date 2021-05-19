@@ -2,7 +2,9 @@ package com.iss.cms.web.converter;
 
 import com.iss.cms.core.domain.Section;
 import com.iss.cms.web.dto.SectionDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SectionConverter extends BaseConverter<Section, SectionDTO>{
     @Override
     public Section convertDTOToModel(SectionDTO dto) {

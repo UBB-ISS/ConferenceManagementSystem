@@ -53,7 +53,11 @@ export class RoleComponent implements OnInit {
   goToUpdateProposalPage(paperId: number): void {
     this.router.navigate(['updateProposal'], {
       queryParams: {
-       paperId: paperId
+        paperId: paperId,
+        userId: this.userId,
+        conferenceId: this.conferenceId,
+        role: this.role,
+        username: this.username
       }
     }).then(_ => {});
   }

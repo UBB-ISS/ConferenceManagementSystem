@@ -2,7 +2,9 @@ package com.iss.cms.web.converter;
 
 import com.iss.cms.core.domain.PaperSection;
 import com.iss.cms.web.dto.PaperSectionDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PaperSectionConverter extends BaseConverter<PaperSection, PaperSectionDTO> {
     @Override
     public PaperSection convertDTOToModel(PaperSectionDTO dto) {
