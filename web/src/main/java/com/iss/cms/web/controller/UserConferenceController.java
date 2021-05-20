@@ -93,6 +93,13 @@ public class UserConferenceController {
         logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method finished");
         return roles;
     }
-       
 
+
+    @RequestMapping(value="/getUserConference/{userId}/{conferenceId}")
+    UserConference  getUserConference(@PathVariable int userId, @PathVariable int conferenceId) {
+        logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method entered");
+        UserConference user = this.userConferenceService.getUserConference(userId, conferenceId);
+        logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method finished");
+        return user;
+    }
 }

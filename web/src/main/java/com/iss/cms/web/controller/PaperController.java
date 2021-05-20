@@ -74,4 +74,21 @@ public class PaperController {
         logger.trace("PaperController - getFinalPapersFromAConference(): method finished");
         return papersDTO;
     }
+
+    @PostMapping("/papers/update")
+    public void updatePaper(@RequestBody PaperDTO paperDTO){
+        logger.info(paperDTO.toString());
+        System.out.println(paperDTO.toString());
+        Paper paper = paperConverter.convertDTOToModel(paperDTO);
+        logger.info(paper.toString());
+        paperService.updatePaper(
+                    paper.getId(),
+                    paper.getTitle(),
+                    paper.getKeywords(),
+                    paper.getPaperText(),
+                    paper.getAbstractText(),
+                    paper.isFinalized(),
+                    paper.isAccepted()
+            );
+    }
 }

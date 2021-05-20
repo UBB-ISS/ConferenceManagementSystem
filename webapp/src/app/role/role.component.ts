@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { Paper } from "../shared/paper.model";
 import { PaperService } from "../shared/paper.service";
-import { ConferenceService } from "../shared/conference.service";
+import {ConferenceService} from "../shared/conference.service";
 
 @Component({
   selector: 'app-role',
@@ -15,9 +15,8 @@ export class RoleComponent implements OnInit {
   conferenceId: number = 0;
   role: string = '';
   username: string = '';
-
   papers: Array<Paper> = {} as Array<Paper>;
-  finalPapersFromAConference: Array<Paper> = {} as Array<Paper>;
+  finalPapersFromAConference: Array<Paper> = [];
 
   constructor(private conferenceService: ConferenceService, private paperService: PaperService,
               private route: ActivatedRoute, private router: Router) { }
@@ -53,13 +52,21 @@ export class RoleComponent implements OnInit {
   }
 
   goToUpdateProposalPage(paperId: number): void {
+    // @ts-ignore
+    const {abstractText, accepted, finalized, keywords, paperText, title} = this.papers.find(({id}) => id === paperId);
     this.router.navigate(['updateProposal'], {
       queryParams: {
         paperId: paperId,
         userId: this.userId,
         conferenceId: this.conferenceId,
         role: this.role,
-        username: this.username
+        username: this.username,
+        title: title,
+        keywords: keywords,
+        abstractText: abstractText,
+        paperText: paperText,
+        accepted: accepted,
+        finalized: finalized
       }
     }).then(_ => {});
   }

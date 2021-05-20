@@ -17,6 +17,8 @@ import { BidProposalComponent } from './bid-proposal/bid-proposal.component';
 import { UserService } from "./shared/user.service";
 import { ConferenceService } from "./shared/conference.service";
 import { PaperService } from "./shared/paper.service";
+import {UserConferenceService} from "./shared/user-conference.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -34,11 +36,13 @@ import { PaperService } from "./shared/paper.service";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [UserService,
               ConferenceService,
-              PaperService
+              PaperService,
+              UserConferenceService
              ],
   bootstrap: [AppComponent]
 })

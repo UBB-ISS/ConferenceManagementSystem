@@ -146,4 +146,11 @@ public class UserConferenceService implements IUserConferenceService {
     public List<Conference> getAllConferencesFromAGivenUser(int userId) {
         return null;
     }
+
+    public UserConference getUserConference(int userId, int conferenceId) {
+        return this.userConferenceRepository.findAllByConferenceID(userId)
+                .stream()
+                .filter( userConference -> userConference.getConferenceID() == conferenceId)
+                .findFirst().get();
+    }
 }

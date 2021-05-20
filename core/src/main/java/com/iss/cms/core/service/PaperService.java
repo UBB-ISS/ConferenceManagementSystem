@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,4 +120,25 @@ public class PaperService implements IPaperService{
         logger.trace("PaperService - getFinalPapersFromAConference: method finished");
         return papers;
     }
+
+    @Override
+    @Transactional
+    public void updatePaper(int id, String title, String keywords, String paperText, String abstractText, boolean finalized, boolean accepted) {
+        paperRepository.findById(id)
+                .ifPresentOrElse(
+                        (updatedPaper) -> {
+                            updatedPaper.setTitle(title);
+                            updatedPaper.setKeywords(keywords);
+                            updatedPaper.setPaperText(paperText);
+                            updatedPaper.setAbstractText(abstractText);
+                            updatedPaper.setFinalized(finalized);
+                            updatedPaper.setAccepted(accepted);
+                        }
+                        , () -> {
+                            logger.trace("PaperRepository: UpdatePaper -> ValidatorException: Customer does not exist!");
+                            throw new CMSException("Paper does not exist!");
+                        }
+                );
+    }
+
 }

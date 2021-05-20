@@ -22,4 +22,13 @@ public interface IPaperService {
     List<Paper> getPapersOfAUserInAConference(int userId, int conferenceId);
 
     List<Paper> getFinalPapersFromAConference(int conferenceId);
+
+    void updatePaper(
+            int id,
+            String title,
+            String keywords,
+            String paperText,
+            String abstractText,
+            boolean finalized,
+            boolean accepted);
 }
