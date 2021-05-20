@@ -4,6 +4,7 @@ import com.iss.cms.core.domain.AppUser;
 import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.service.IUserService;
 import com.iss.cms.web.converter.UserConverter;
+import com.iss.cms.web.dto.LoginDTO;
 import com.iss.cms.web.dto.UserDTO;
 import com.iss.cms.web.dto.UsersDTO;
 import org.slf4j.Logger;
@@ -42,15 +43,24 @@ public class UserController {
         return userService.isUsernameExistent(username);
     }
 
-    @RequestMapping(value = "/login/{username}/{password}")
-    UserDTO login(@PathVariable String username, @PathVariable String password) throws CMSException {
-        logger.trace("UserController - login(): method entered -> username = " + username + ", password = " + password);
-        AppUser appUser = userService.login(username, password);
+//    @RequestMapping(value = "/login/{username}/{password}")
+//    UserDTO login(@PathVariable String username, @PathVariable String password) throws CMSException {
+//        logger.trace("UserController - login(): method entered -> username = " + username + ", password = " + password);
+//        AppUser appUser = userService.login(username, password);
+//        UserDTO userDTO;
+//        if(appUser == null) userDTO = null;
+//        else userDTO = userConverter.convertModelToDTO(appUser);
+//
+//        logger.trace("UserController - login(): method finished");
+//        return userDTO;
+//    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    UserDTO login(@RequestBody LoginDTO loginDTO) throws CMSException {
+        AppUser appUser = userService.login(loginDTO.getUsername(), loginDTO.getPassword());
         UserDTO userDTO;
         if(appUser == null) userDTO = null;
         else userDTO = userConverter.convertModelToDTO(appUser);
-
-        logger.trace("UserController - login(): method finished");
         return userDTO;
     }
 

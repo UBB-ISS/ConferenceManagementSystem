@@ -44,7 +44,26 @@ export class ConferencesComponent implements OnInit {
     }).then(_ => {});
   }
 
+  goToAddConferencePage() {
+    this.router.navigate(['addConference'], {
+      queryParams: {
+        userId: this.id,
+        username: this.username
+      }
+    }).then(_ => {});
+  }
+
   dateOf(date: any) {
-    return `${date.monthValue}/${date.dayOfMonth}/${date.year}`;
+    return `${date.month}/${date.day}/${date.year}`;
+  }
+
+  goToChangeDeadlinesPage(conferenceId: number): void {
+    this.router.navigate(['changeDeadlines'], {
+      queryParams: {
+        userId: this.id,
+        username: this.username,
+        conferenceId: conferenceId
+      }
+    }).then(_ => {});
   }
 }

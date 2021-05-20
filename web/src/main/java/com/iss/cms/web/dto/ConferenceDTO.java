@@ -13,9 +13,9 @@ import java.time.LocalDate;
 public class ConferenceDTO {
     private int id;
     private String name;
-    private LocalDate date;
+    private DateDTO date;
     private int entryFee;
-    private LocalDate biddingPhaseDeadline;
-    private LocalDate submitPaperDeadline;
-    private LocalDate reviewPaperDeadline;
+    private DateDTO biddingPhaseDeadline;
+    private DateDTO submitPaperDeadline;
+    private DateDTO reviewPaperDeadline;
 }

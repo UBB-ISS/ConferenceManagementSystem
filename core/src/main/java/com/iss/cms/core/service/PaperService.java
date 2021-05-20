@@ -135,7 +135,7 @@ public class PaperService implements IPaperService{
                             updatedPaper.setAccepted(accepted);
                         }
                         , () -> {
-                            logger.trace("PaperRepository: UpdatePaper -> ValidatorException: Customer does not exist!");
+                            logger.trace("PaperService: UpdatePaper -> Paper does not exist!");
                             throw new CMSException("Paper does not exist!");
                         }
                 );

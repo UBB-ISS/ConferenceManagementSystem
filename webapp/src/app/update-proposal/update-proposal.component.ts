@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {UserConferenceService} from "../shared/user-conference.service";
-import {PaperService} from "../shared/paper.service";
+import { PaperService } from "../shared/paper.service";
 
 @Component({
   selector: 'app-update-proposal',
@@ -55,6 +54,7 @@ export class UpdateProposalComponent implements OnInit {
       .subscribe(
         result => {
           console.log(result);
+          this.goToViewProposalsPage();
         }
       )
   }

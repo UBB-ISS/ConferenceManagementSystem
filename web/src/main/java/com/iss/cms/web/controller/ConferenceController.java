@@ -3,6 +3,7 @@ package com.iss.cms.web.controller;
 import com.iss.cms.core.domain.Conference;
 import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.service.ConferenceService;
+import com.iss.cms.core.service.IConferenceService;
 import com.iss.cms.web.converter.ConferenceConverter;
 import com.iss.cms.web.dto.ConferenceDTO;
 import com.iss.cms.web.dto.ConferencesDTO;
@@ -18,7 +19,7 @@ public class ConferenceController {
     private static final Logger logger = LoggerFactory.getLogger(ConferenceController.class);
 
     @Autowired
-    private ConferenceService conferenceService;
+    private IConferenceService conferenceService;
 
     @Autowired
     private ConferenceConverter conferenceConverter;
@@ -52,5 +53,12 @@ public class ConferenceController {
         }catch (CMSException e){
             logger.trace(conference.toString());
         }
+    }
+
+    @RequestMapping(value="/changeDeadlines", method = RequestMethod.PUT)
+    public void changeDeadlines(@RequestBody ConferenceDTO conferenceDTO) throws CMSException {
+        Conference conference = conferenceConverter.convertDTOToModel(conferenceDTO);
+        conferenceService.changeDeadlines(conference.getId(), conference.getBiddingPhaseDeadline(),
+                conference.getSubmitPaperDeadline(), conference.getReviewPaperDeadline());
     }
 }

@@ -14,4 +14,7 @@ public interface IConferenceService {
 
     void addConference(String name, LocalDate date, int entryFee, LocalDate biddingPhaseDeadline,
                        LocalDate submitPaperDeadline, LocalDate reviewPaperDeadline) throws CMSException;
+
+    void changeDeadlines(int id, LocalDate newBiddingPhaseDeadline,
+                         LocalDate newSubmitPaperDeadline, LocalDate newReviewPaperDeadline) throws CMSException;
 }

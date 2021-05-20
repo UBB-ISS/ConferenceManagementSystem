@@ -1,0 +1,45 @@
+<div class="form">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h1 class="panel-title"> Add Conference </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="form-label" for="name"> Name </label>
+        <input class="form-control" type="text" id="name" autocomplete="off" #name>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="price"> Price </label>
+        <input class="form-control" type="number" id="price" autocomplete="off" #price>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="dateConference"> Date </label>
+        <input class="form-control" type="date" id="dateConference" autocomplete="off" #dateConference>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="bidding"> Bidding Phase Deadline </label>
+        <input class="form-control" type="date" id="bidding" autocomplete="off" #bidding>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="submit"> Submit Phase Deadline </label>
+        <input class="form-control" type="date" id="submit" autocomplete="off" #submit>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="review"> Review Phase Deadline </label>
+        <input class="form-control" type="date" id="review" autocomplete="off" #review>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <button class="btn btn-info" (click)="addConference(name.value, price.valueAsNumber, dateConference.value,
+            bidding.value, submit.value, review.value)"> Add Conference </button>
+      <button class="btn btn-danger" (click)="goToConferencesPage()"> Cancel </button>
+    </div>
+  </div>
+</div>

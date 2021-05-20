@@ -2,12 +2,13 @@ export class Conference {
   id: number = 0;
   name: string;
   entryFee: number;
-  date: string;
-  biddingPhaseDeadline: string;
-  submitPaperDeadline: string;
-  reviewPaperDeadline: string;
+  date: any;
+  biddingPhaseDeadline: any;
+  submitPaperDeadline: any;
+  reviewPaperDeadline: any;
 
-  constructor(name: string, entryFee: number, date: string, bidding: string, submit: string, review: string) {
+  constructor(id: number = 0, name: string, entryFee: number, date: any, bidding: any, submit: any, review: any) {
+    this.id = id;
     this.name = name;
     this.entryFee = entryFee;
     this.date = date;

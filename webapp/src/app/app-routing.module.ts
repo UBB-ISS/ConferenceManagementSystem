@@ -10,6 +10,8 @@ import { RolesForSelectedConferenceComponent } from './roles-for-selected-confer
 import { UpdateProposalComponent } from './update-proposal/update-proposal.component';
 import { RoleComponent } from "./role/role.component";
 import { BidProposalComponent } from "./bid-proposal/bid-proposal.component";
+import { AddConferenceComponent } from "./add-conference/add-conference.component";
+import { ChangeDeadlinesComponent } from "./change-deadlines/change-deadlines.component";
 
 const routes: Routes = [
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: 'updateProposal', component: UpdateProposalComponent },
   { path: 'role', component: RoleComponent },
   { path: 'bidProposal', component: BidProposalComponent },
+  { path: 'addConference', component: AddConferenceComponent },
+  { path: 'changeDeadlines', component: ChangeDeadlinesComponent }
 ];
 
 @NgModule({

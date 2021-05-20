@@ -6,7 +6,9 @@ import com.iss.cms.core.repository.ConferenceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -57,5 +59,27 @@ public class ConferenceService implements IConferenceService {
         conferenceRepository.save(conference);
 
         logger.trace("ConferenceService - addConference(): method finished");
+    }
+
+    @Override
+    @Transactional
+    public void changeDeadlines(int id, LocalDate newBiddingPhaseDeadline, LocalDate newSubmitPaperDeadline,
+                                LocalDate newReviewPaperDeadline) throws CMSException {
+        logger.trace("ConferenceService - changeDeadlines(): method entered");
+
+        conferenceRepository.findById(id)
+                .ifPresentOrElse(
+                        (updatedConference) -> {
+                            updatedConference.setBiddingPhaseDeadline(newBiddingPhaseDeadline);
+                            updatedConference.setSubmitPaperDeadline(newSubmitPaperDeadline);
+                            updatedConference.setReviewPaperDeadline(newReviewPaperDeadline);
+                        }
+                        , () -> {
+                            logger.trace("ConferenceService: changeDeadlines -> Conference does not exist!");
+                            throw new CMSException("Conference does not exist!");
+                        }
+                );
+
+        logger.trace("ConferenceService - changeDeadlines(): method finished");
     }
 }

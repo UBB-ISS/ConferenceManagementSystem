@@ -148,9 +148,9 @@ public class UserConferenceService implements IUserConferenceService {
     }
 
     public UserConference getUserConference(int userId, int conferenceId) {
-        return this.userConferenceRepository.findAllByConferenceID(userId)
+        return this.userConferenceRepository.findAllByConferenceID(conferenceId)
                 .stream()
-                .filter( userConference -> userConference.getConferenceID() == conferenceId)
+                .filter( userConference -> userConference.getUserID() == userId)
                 .findFirst().get();
     }
 }

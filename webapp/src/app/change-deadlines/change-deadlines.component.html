@@ -1,0 +1,30 @@
+<div class="form">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h1 class="panel-title"> Change Deadlines </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="form-label" for="bidding"> New Bidding Phase Deadline </label>
+        <input class="form-control" type="date" id="bidding" autocomplete="off" #bidding>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="submit"> New Submit Phase Deadline </label>
+        <input class="form-control" type="date" id="submit" autocomplete="off" #submit>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="review"> New Review Phase Deadline </label>
+        <input class="form-control" type="date" id="review" autocomplete="off" #review>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <button class="btn btn-info"
+              (click)="changeDeadlines(bidding.value, submit.value, review.value)"> Change Deadlines </button>
+      <button class="btn btn-danger" (click)="goToConferencesPage()"> Cancel </button>
+    </div>
+  </div>
+</div>
