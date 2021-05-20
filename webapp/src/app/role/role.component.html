@@ -29,8 +29,8 @@
           <td> {{paper.paperText}} </td>
           <td> {{paper.abstractText}} </td>
           <td> {{paper.keywords}} </td>
-          <td> {{paper.finalized}} </td>
-          <td> {{paper.accepted}} </td>
+          <td> <input type="checkbox" [checked]="paper.finalized === true" disabled="disabled"> </td>
+          <td> <input type="checkbox" [checked]="paper.accepted === true" disabled="disabled"> </td>
           <td> <button class="btn btn-secondary" (click)="goToUpdateProposalPage(paper.id)"
                 [disabled]="paper.finalized || paper.accepted"> Update paper </button> </td>
         </tr>
