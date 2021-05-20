@@ -72,7 +72,7 @@ export class RoleComponent implements OnInit {
   }
 
   dateOf(date: any) {
-    return `${date.monthValue}/${date.dayOfMonth}/${date.year}`;
+    return `${date.month}/${date.day}/${date.year}`;
   }
 
   goToBidPaperPage(paperId: number): void {
