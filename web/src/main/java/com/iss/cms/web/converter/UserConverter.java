@@ -15,7 +15,7 @@ public class UserConverter extends BaseConverter<AppUser, UserDTO> {
         logger.trace("UserConverter - convertDTOToModel: method entered -> " + dto.toString());
 
         AppUser model = new AppUser();
-        model.setId(dto.getId());
+        //model.setId(dto.getId());
         model.setName(dto.getName());
         model.setEmail(dto.getEmail());
         model.setAffiliation(dto.getAffiliation());

@@ -3,11 +3,17 @@ export class Conference {
   name: string;
   entryFee: number;
   date: string;
+  biddingPhaseDeadline: string;
+  submitPaperDeadline: string;
+  reviewPaperDeadline: string;
 
-  constructor(name: string, entryFee: number, date: string) {
+  constructor(name: string, entryFee: number, date: string, bidding: string, submit: string, review: string) {
     this.name = name;
     this.entryFee = entryFee;
     this.date = date;
+    this.biddingPhaseDeadline = bidding;
+    this.submitPaperDeadline = submit;
+    this.reviewPaperDeadline = review;
   }
 }
 

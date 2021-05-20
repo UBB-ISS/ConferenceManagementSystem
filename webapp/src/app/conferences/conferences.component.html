@@ -3,10 +3,10 @@
     <h2> Conferences </h2>
   </div>
 
-  <!--  <div class="item3" *ngIf="user.affiliation == 'admin'">
+    <div class="item3" *ngIf="username == 'admin'">
       <button class="btn btn-secondary"> Add Conference </button>
       <button class="btn btn-secondary"> Set Deadlines </button>
-    </div>-->
+    </div>
 
   <div class="item2">
     <table class="table table-striped">
@@ -15,7 +15,9 @@
           <th> Name</th>
           <th> Price</th>
           <th> Date</th>
-          <th></th>
+          <th> Bidding Phase Deadline </th>
+          <th> Submit Phase Deadline </th>
+          <th> Review Phase Deadline </th>
         </tr>
       </thead>
 
@@ -24,12 +26,9 @@
           <td> {{conference.name}} </td>
           <td> {{conference.entryFee}} </td>
           <td> {{dateOf(conference.date)}}</td>
-          <td>
-            <div class="buttons">
-              <button class="buttons" (click)="goToSubmitProposalPage()"> Create a proposal</button>
-              <button class="btn btn-secondary" (click)="goToViewProposalsPage()"> View proposals</button>
-            </div>
-          </td>
+          <td> {{dateOf(conference.biddingPhaseDeadline)}} </td>
+          <td> {{dateOf(conference.submitPaperDeadline)}} </td>
+          <td> {{dateOf(conference.reviewPaperDeadline)}} </td>
         </tr>
       </tbody>
     </table>

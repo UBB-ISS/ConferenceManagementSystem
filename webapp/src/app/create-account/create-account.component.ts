@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { UserService } from "../shared/user.service";
 import { User } from "../shared/user.model";
+import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: 'app-create-account',
@@ -10,21 +11,20 @@ import { User } from "../shared/user.model";
   styleUrls: ['./create-account.component.scss']
 })
 export class CreateAccountComponent implements OnInit {
-  user: User = {} as User;
 
   constructor(private service: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  goToConferences(): void {
-    this.router.navigate(['conferences']).then(_ => {});
+  goToLoginPage(): void {
+    this.router.navigate(['loginPage']).then(_ => {});
   }
 
   createAccount(name: string, email: string, affiliation: string, website: string, username: string, password: string): void {
     this.service.createAccount(name, email, affiliation, website, username, password)
-                .subscribe((message) => {
-                  this.goToConferences()
+                .subscribe(() => {
+                  this.goToLoginPage()
                 });
   }
 }

@@ -20,4 +20,13 @@ public class Conference implements Serializable {
     private LocalDate biddingPhaseDeadline;
     private LocalDate submitPaperDeadline;
     private LocalDate reviewPaperDeadline;
+
+    public Conference(String name, LocalDate date, int entryFee, LocalDate biddingPhaseDeadline, LocalDate submitPaperDeadline, LocalDate reviewPaperDeadline) {
+        this.name = name;
+        this.date = date;
+        this.entryFee = entryFee;
+        this.biddingPhaseDeadline = biddingPhaseDeadline;
+        this.submitPaperDeadline = submitPaperDeadline;
+        this.reviewPaperDeadline = reviewPaperDeadline;
+    }
 }

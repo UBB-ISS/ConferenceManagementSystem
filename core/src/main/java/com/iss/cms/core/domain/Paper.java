@@ -18,7 +18,6 @@ public class Paper implements Serializable {
     @GeneratedValue
     private int id;
 
-    private int authorId;
     private int userConferenceId;
     private String title;
     private String keywords;
@@ -26,4 +25,14 @@ public class Paper implements Serializable {
     private String abstractText;
     private boolean finalized;
     private boolean accepted;
+
+    public Paper(int userConferenceId, String title, String keywords, String paperText, String abstractText, boolean finalized, boolean accepted) {
+        this.userConferenceId = userConferenceId;
+        this.title = title;
+        this.keywords = keywords;
+        this.paperText = paperText;
+        this.abstractText = abstractText;
+        this.finalized = finalized;
+        this.accepted = accepted;
+    }
 }

@@ -2,13 +2,13 @@
   height: 80%;
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 10% 10% 50% 20% 10%;
+  grid-template-rows: 10% 10% 40% 20% 20%;
   grid-template-areas:
   ". . a . ."
   ". . a . ."
   ". b b b ."
   ". c c c ."
-  ". . . . .";
+  ". c c c .";
   text-align: center;
 }
 
@@ -22,10 +22,14 @@
 
 .item3 {
   grid-area: c;
+  justify-self: center;
+  align-self: start;
 }
 
 button {
   margin-top: 10px;
 }
 
-
+ul {
+  margin-left: 15%;
+}

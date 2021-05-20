@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { User, Users } from "./user.model";
+import {UserConference} from "./user-conference.model";
 
 @Injectable()
 export class UserService {
@@ -32,6 +33,6 @@ export class UserService {
   }
 
   addUserToConference(userId: number, conferenceId: number, paid: boolean, role: string): Observable<any> {
-    return this.httpClient.post(this.url + `addUserToConference`);
+    return this.httpClient.post(this.url + `userConferences`, new UserConference(conferenceId, userId, role, paid));
   }
 }

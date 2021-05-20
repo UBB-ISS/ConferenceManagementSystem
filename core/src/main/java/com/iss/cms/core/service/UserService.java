@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {
@@ -23,6 +24,18 @@ public class UserService implements IUserService {
         List<AppUser> users = userRepository.findAll();
         logger.trace("UserService - getAllUsers(): method finished -> " + users.toString());
         return users;
+    }
+
+    @Override
+    public AppUser findUserById(int id) throws CMSException {
+        logger.trace("UserService - findUserById(): method entered");
+        Optional<AppUser> user = userRepository.findById(id);
+        if(user.isEmpty()) {
+            logger.trace("UserService: This id does not exist!");
+            throw new CMSException("This id does not exist!");
+        }
+        logger.trace("UserService - findUserById(): method finished");
+        return user.get();
     }
 
     @Override
@@ -67,9 +80,13 @@ public class UserService implements IUserService {
         }
 
         AppUser appUser = new AppUser(name, email, username, website, affiliation, password);
-        System.out.println(appUser.toString());
         userRepository.save(appUser);
 
         logger.trace("UserService - createAccount(): method finished -> " + appUser.toString());
+    }
+
+    @Override
+    public boolean isUsernameExistent(String username) {
+        return false;
     }
 }

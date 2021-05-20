@@ -1,0 +1,34 @@
+.wrapper {
+  height: 70%;
+  width: 50%;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 60% 20%;
+  grid-template-areas:
+    ". a . c ."
+    ". b b b ."
+    ". d d d . ";
+}
+
+.item1 {
+  grid-area: a;
+  align-self: end;
+}
+
+.item2 {
+  grid-area: b;
+  align-self: start;
+  text-align: center;
+}
+
+.item3 {
+  grid-area: c;
+  justify-self: end;
+  align-self: end;
+  margin-bottom: 5px;
+}
+
+.item4 {
+  grid-area: d;
+  justify-self: center;
+}

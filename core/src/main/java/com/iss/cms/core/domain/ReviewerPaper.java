@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -21,5 +19,6 @@ public class ReviewerPaper implements Serializable {
     private int userId;
     private int paperId;
     private boolean assigned;
+    @Enumerated(EnumType.STRING)
     private Availability availability;
 }

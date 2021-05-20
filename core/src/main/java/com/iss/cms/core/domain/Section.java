@@ -20,4 +20,9 @@ public class Section implements Serializable {
 
     private String name;
     private int conferenceID;
+
+    public Section(String name, int conferenceId) {
+        this.name = name;
+        this.conferenceID = conferenceId;
+    }
 }

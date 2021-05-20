@@ -1,4 +1,4 @@
-<form>
+<div class="form">
   <div class="panel panel-info">
     <div class="panel-heading">
       <h1 class="panel-title"> Update proposal </h1>
@@ -6,36 +6,40 @@
 
     <div class="panel-body">
       <div class="form-group">
-        <label class="form-label" for="abstract"> New Abstract </label>
-        <input class="form-control" type="text" id="abstract" autocomplete="off">
+        <label class="form-label" for="abstract" > New Abstract </label>
+        <input class="form-control" type="text" id="abstract" [(ngModel)]="abstractText" autocomplete="off">
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="paper"> New Paper </label>
-        <input class="form-control" type="text" id="paper" autocomplete="off">
+        <label class="form-label" for="paper" > New Paper </label>
+        <input class="form-control" type="text" id="paper" [(ngModel)]="paperText" autocomplete="off">
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="title"> New Title </label>
-        <input class="form-control" type="text" id="title" autocomplete="off">
+        <label class="form-label" for="title" > New Title </label>
+        <input class="form-control" type="text" id="title" [(ngModel)]="title" autocomplete="off">
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="authors"> New Authors </label>
-        <p><em> Please add the authors separated by semicolon </em></p>
-        <input class="form-control" type="text" id="authors" autocomplete="off">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="keywords"> New Keywords </label>
+        <label class="form-label" for="keywords" > New Keywords </label>
         <p><em> Please add the keywords separated by semicolon </em></p>
-        <input class="form-control" type="text" id="keywords" autocomplete="off">
+        <input class="form-control" type="text" id="keywords" [(ngModel)]="keywords" autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="keywords" > New Finalized </label>
+        <input [checked]="finalized === true" class="form-control" type="checkbox" (change)="this.finalized = !this.finalized"  autocomplete="off">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="keywords" > New Accepted </label>
+        <input [checked]="accepted === true"  class="form-control" type="checkbox"  (change)="this.accepted = !this.accepted" autocomplete="off">
       </div>
     </div>
 
     <div class="panel-footer">
-      <button class="btn btn-info"> Update </button>
+      <button class="btn btn-info" (click)="updatePaper()"> Update </button>
       <button class="btn btn-danger" (click)="goToViewProposalsPage()"> Cancel </button>
     </div>
   </div>
-</form>
+</div>

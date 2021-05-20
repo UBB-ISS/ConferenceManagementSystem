@@ -1,0 +1,68 @@
+.wrapper {
+  height: 80%;
+}
+
+.author {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 60% 20%;
+  grid-template-areas:
+  ". a . b ."
+  ". c c c ."
+  ". . . . .";
+}
+
+.author_item1 {
+  grid-area: a;
+  align-self: end;
+}
+
+.author_item2 {
+  grid-area: b;
+  align-self: end;
+  justify-self: end;
+}
+
+.author_item3 {
+  grid-area: c;
+  align-self: start;
+}
+
+.author table {
+  margin-top: 10px;
+}
+
+.reviewer {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 60% 20%;
+  grid-template-areas:
+  ". a a . ."
+  ". b b b ."
+  ". . c . .";
+}
+
+.reviewer_item1 {
+  grid-area: a;
+}
+
+.reviewer_item2 {
+  grid-area: b;
+  align-self: start;
+}
+
+.reviewer_item3 {
+  grid-area: c;
+}
+
+button {
+  margin-left: 10px;
+}
+
+input {
+  margin-left: 30%;
+  width: 20px;
+  height: 20px;
+}

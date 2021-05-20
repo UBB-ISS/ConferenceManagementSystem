@@ -8,6 +8,8 @@ import { SubmitProposalComponent } from './submit-proposal/submit-proposal.compo
 import { ViewProposalsComponent } from './view-proposals/view-proposals.component';
 import { RolesForSelectedConferenceComponent } from './roles-for-selected-conference/roles-for-selected-conference.component';
 import { UpdateProposalComponent } from './update-proposal/update-proposal.component';
+import { RoleComponent } from "./role/role.component";
+import { BidProposalComponent } from "./bid-proposal/bid-proposal.component";
 
 const routes: Routes = [
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,7 +19,11 @@ const routes: Routes = [
   { path: 'submitProposal', component: SubmitProposalComponent },
   { path: 'viewProposals', component: ViewProposalsComponent },
   { path: 'roles', component: RolesForSelectedConferenceComponent },
-  { path: 'updateProposal', component: UpdateProposalComponent }
+  { path: 'updateProposal', component: UpdateProposalComponent },
+  { path: 'role', component: RoleComponent },
+  { path: 'updateProposal', component: UpdateProposalComponent },
+  { path: 'role', component: RoleComponent },
+  { path: 'bidProposal', component: BidProposalComponent },
 ];
 
 @NgModule({

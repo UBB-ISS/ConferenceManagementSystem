@@ -1,14 +1,15 @@
 package com.iss.cms.web.controller;
 
 import com.iss.cms.core.domain.Conference;
+import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.service.ConferenceService;
 import com.iss.cms.web.converter.ConferenceConverter;
+import com.iss.cms.web.dto.ConferenceDTO;
 import com.iss.cms.web.dto.ConferencesDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +30,27 @@ public class ConferenceController {
         ConferencesDTO conferencesDTO = new ConferencesDTO(conferenceConverter.convertModelsToDTOs(conferences));
         logger.trace("ConferenceController - getAllConferences(): method finished -> " + conferencesDTO.toString());
         return conferencesDTO;
+    }
+
+    @RequestMapping(value="/conference/{id}")
+    public ConferenceDTO findConferenceById(@PathVariable("id") int id){
+        return conferenceConverter.convertModelToDTO(conferenceService.findConferenceById(id));
+    }
+
+    @PostMapping(value="/conferences")
+    public void addConference(@RequestBody ConferenceDTO conferenceDTO){
+        Conference conference = conferenceConverter.convertDTOToModel(conferenceDTO);
+        try{
+            conferenceService.addConference(
+                    conference.getName(),
+                    conference.getDate(),
+                    conference.getEntryFee(),
+                    conference.getBiddingPhaseDeadline(),
+                    conference.getSubmitPaperDeadline(),
+                    conference.getReviewPaperDeadline()
+            );
+        }catch (CMSException e){
+            logger.trace(conference.toString());
+        }
     }
 }

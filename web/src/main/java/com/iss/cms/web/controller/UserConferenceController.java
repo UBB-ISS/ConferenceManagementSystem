@@ -1,10 +1,14 @@
 package com.iss.cms.web.controller;
 
 import com.iss.cms.core.domain.AppUser;
+import com.iss.cms.core.domain.Conference;
 import com.iss.cms.core.domain.UserConference;
+import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.service.UserConferenceService;
+import com.iss.cms.web.converter.ConferenceConverter;
 import com.iss.cms.web.converter.UserConferenceConverter;
 import com.iss.cms.web.converter.UserConverter;
+import com.iss.cms.web.dto.*;
 import com.iss.cms.web.dto.UserConferencesDTO;
 import com.iss.cms.web.dto.UsersDTO;
 import org.slf4j.Logger;
@@ -13,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +33,9 @@ public class UserConferenceController {
 
     @Autowired
     private UserConverter userConverter;
+
+    @Autowired
+    private ConferenceConverter conferenceConverter;
 
     @RequestMapping(value="/userConferences")
     UserConferencesDTO getAllUserConferences() {
@@ -47,6 +55,13 @@ public class UserConferenceController {
         return usersDTO;
     }
 
+    @RequestMapping(value="/allConferencesFromAGivenUser/{userId}")
+    public ConferencesDTO getAllConferencesFromAGivenUser(@PathVariable("userId") int userId){
+        List<Conference> conferences = userConferenceService.getAllConferencesFromAGivenUser(userId);
+        return new ConferencesDTO(conferenceConverter.convertModelsToDTOs(conferences));
+    }
+
+    
     @RequestMapping(value="/allRolesForAGivenUser/{userId}")
     List<String>  getAllRolesForAGivenUser(@PathVariable int userId) {
         logger.trace("UserConferenceController - getAllRolesForAGivenUser: method entered -> userId = " + userId);
@@ -54,12 +69,37 @@ public class UserConferenceController {
         logger.trace("UserConferenceController - getAllRolesForAGivenUser: method finished -> " + roles.toString());
         return roles;
     }
+    
+    @RequestMapping(value="/userConferences", method=RequestMethod.POST)
+    public void addUserToConference(@RequestBody UserConferenceDTO userConferenceDTO){
+        UserConference userConference = userConferenceConverter.convertDTOToModel(userConferenceDTO);
+        try{
 
+            userConferenceService.addUserToConference(
+                    userConference.getUserID(),
+                    userConference.getConferenceID(),
+                    userConference.getRole(),
+                    userConference.isPaid());
+        }
+        catch (CMSException e)
+        {
+            logger.trace(e.toString());
+        }
+    }
     @RequestMapping(value="/allRolesForAGivenUserInAGivenConference/{userId}/{conferenceId}")
     List<String>  getAllRolesForAGivenUserInAGivenConference(@PathVariable int userId, @PathVariable int conferenceId) {
         logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method entered");
         List<String> roles = this.userConferenceService.getAllRolesForAGivenUserInAGivenConference(userId, conferenceId);
         logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method finished");
         return roles;
+    }
+
+
+    @RequestMapping(value="/getUserConference/{userId}/{conferenceId}")
+    UserConference  getUserConference(@PathVariable int userId, @PathVariable int conferenceId) {
+        logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method entered");
+        UserConference user = this.userConferenceService.getUserConference(userId, conferenceId);
+        logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method finished");
+        return user;
     }
 }
