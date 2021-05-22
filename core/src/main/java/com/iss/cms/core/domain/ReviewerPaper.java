@@ -21,4 +21,11 @@ public class ReviewerPaper implements Serializable {
     private boolean assigned;
     @Enumerated(EnumType.STRING)
     private Availability availability;
+
+    public ReviewerPaper(int userId, int paperId, boolean assigned, Availability availability) {
+        this.userId = userId;
+        this.paperId = paperId;
+        this.assigned = assigned;
+        this.availability = availability;
+    }
 }

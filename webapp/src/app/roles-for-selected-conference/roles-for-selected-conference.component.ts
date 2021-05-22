@@ -51,6 +51,7 @@ export class RolesForSelectedConferenceComponent implements OnInit {
       }
     }).then(_ => {});
   }
+
   verify(role: string): void {
     let ok = true;
     let verify_author = false;

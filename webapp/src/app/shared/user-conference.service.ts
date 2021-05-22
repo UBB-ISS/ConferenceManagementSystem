@@ -1,7 +1,9 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {UserConference} from "./user-conference.model";
-import {Observable} from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+
+import { UserConference } from "./user-conference.model";
+import { Users } from "./user.model";
 
 @Injectable()
 export class UserConferenceService {
@@ -11,5 +13,9 @@ export class UserConferenceService {
 
   getUserConference( userId: number,  conferenceId: number): Observable<UserConference> {
     return this.httpClient.get<UserConference>(this.url + `getUserConference/${userId}/${conferenceId}`);
+  }
+
+  getAllUsersFromAGivenConferenceWithAGivenRole(conferenceId: number, role: string): Observable<Users> {
+    return this.httpClient.get<Users>(this.url + `allUsersFromAGivenConferenceWithAGivenRole/${conferenceId}/${role}`);
   }
 }

@@ -22,4 +22,6 @@ public interface IUserConferenceService {
     void payFeeForUser(int userId, int conferenceId);
 
     List<Conference> getAllConferencesFromAGivenUser(int userId);
+
+    List<AppUser> getAllUsersFromAGivenConferenceWithAGivenRole(int conferenceId, Role role);
 }

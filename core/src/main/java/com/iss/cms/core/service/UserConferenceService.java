@@ -153,4 +153,22 @@ public class UserConferenceService implements IUserConferenceService {
                 .filter( userConference -> userConference.getUserID() == userId)
                 .findFirst().get();
     }
+
+    @Override
+    public List<AppUser> getAllUsersFromAGivenConferenceWithAGivenRole(int conferenceId, Role role) {
+        logger.trace("UserConferenceService - getAllUsersFromAGivenConferenceWithAGivenRole: method entered");
+
+        List<UserConference> userConferences = userConferenceRepository.findAllByConferenceID(conferenceId);
+
+        List<AppUser> users = new ArrayList<>();
+        for(UserConference userConference: userConferences) {
+            if(userConference.getRole() == role) {
+                Optional<AppUser> appUser = userRepository.findById(userConference.getUserID());
+                appUser.ifPresent(users::add);
+            }
+        }
+
+        logger.trace("UserConferenceService - getAllUsersFromAGivenConferenceWithAGivenRole: method finished");
+        return users;
+    }
 }

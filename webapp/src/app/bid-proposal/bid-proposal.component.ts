@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import { PaperService } from "../shared/paper.service";
 import { Paper } from "../shared/paper.model";
+import {ReviewerPaperService} from "../shared/reviewer-paper.service";
+import {ReviewerPaper} from "../shared/reviewer-paper.model";
 
 @Component({
   selector: 'app-bid-proposal',
@@ -16,10 +18,13 @@ export class BidProposalComponent implements OnInit {
   paperId: number = 0;
 
   paper: Paper = {} as Paper;
+  availablePaper: ReviewerPaper = {} as ReviewerPaper;
+  ok: boolean = true;
 
-  allPossibleAvailability: Array<String> = ['PLEASED', 'OK', 'REFUSE'];
+  allPossibleAvailability: Array<string> = ['PLEASED', 'OK', 'REFUSE'];
 
-  constructor(private paperService: PaperService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private paperService: PaperService, private availabilityService: ReviewerPaperService,
+              private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.queryParams.userId;
@@ -28,6 +33,7 @@ export class BidProposalComponent implements OnInit {
     this.paperId = this.route.snapshot.queryParams.paperId;
 
     this.getPaperById(this.paperId);
+    this.getAvailabilityForUserAndPaper(this.userId, this.paperId);
   }
 
   goToRolePage(): void {
@@ -41,10 +47,32 @@ export class BidProposalComponent implements OnInit {
     }).then(_ => {});
   }
 
+  addAndGoToRolePage(status: string): void {
+    this.availabilityService.addAvailability(this.userId, this.paperId, false, status).subscribe(
+      () => {
+        this.router.navigate(['role'], {
+          queryParams: {
+            userId: this.userId,
+            conferenceId: this.conferenceId,
+            role: 'REVIEWER',
+            username: this.username
+          }
+        }).then(_ => {});
+      });
+  }
+
   getPaperById(paperId: number) {
     this.paperService.getPaperById(paperId).subscribe(
       (paper) => {
         this.paper = paper;
+      });
+  }
+
+  getAvailabilityForUserAndPaper(userId: number, paperId: number) {
+    this.availabilityService.findAvailabilityByUserId(userId, paperId).subscribe(
+      (availablePaper) => {
+        this.availablePaper = availablePaper;
+        if(this.availablePaper == null) this.ok = false;
       });
   }
 }

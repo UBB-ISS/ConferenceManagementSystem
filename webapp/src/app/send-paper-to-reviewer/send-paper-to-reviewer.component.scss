@@ -1,0 +1,36 @@
+.wrapper {
+  height: 80%;
+  display: grid;
+  grid-template-columns: 5% 20% 20% 5% 5% 20% 20% 5%;
+  grid-template-rows: 15% 10% 60% 15%;
+  grid-template-areas:
+  ". .  .  . . .  .  ."
+  ". a1 .  . . b1 .  ."
+  ". a2 a2 . . b2 b2 ."
+  ". .  .  c c .  .  .";
+}
+
+.item1 {
+  grid-area: a1;
+  align-self: end;
+}
+
+.item2 {
+  grid-area: a2;
+  align-self: start;
+}
+
+.item3 {
+  grid-area: b1;
+  align-self: end;
+}
+
+.item4 {
+  grid-area: b2;
+}
+
+.item5 {
+  grid-area: c;
+  align-self: center;
+  justify-self: center;
+}

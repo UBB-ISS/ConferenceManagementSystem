@@ -43,18 +43,6 @@ public class UserController {
         return userService.isUsernameExistent(username);
     }
 
-//    @RequestMapping(value = "/login/{username}/{password}")
-//    UserDTO login(@PathVariable String username, @PathVariable String password) throws CMSException {
-//        logger.trace("UserController - login(): method entered -> username = " + username + ", password = " + password);
-//        AppUser appUser = userService.login(username, password);
-//        UserDTO userDTO;
-//        if(appUser == null) userDTO = null;
-//        else userDTO = userConverter.convertModelToDTO(appUser);
-//
-//        logger.trace("UserController - login(): method finished");
-//        return userDTO;
-//    }
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     UserDTO login(@RequestBody LoginDTO loginDTO) throws CMSException {
         AppUser appUser = userService.login(loginDTO.getUsername(), loginDTO.getPassword());

@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <div class="item1">
+    <h4> Reviewers </h4>
+  </div>
+
+  <div class="item2">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th> ID </th>
+          <th> Name </th>
+          <th> Username </th>
+          <th> Email </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let reviewer of reviewers">
+          <td> {{reviewer.id}} </td>
+          <td> {{reviewer.name}} </td>
+          <td> {{reviewer.username}} </td>
+          <td> {{reviewer.email}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="item3">
+    <h4> Bid Papers </h4>
+  </div>
+
+  <div class="item4">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th> ReviewerID </th>
+          <th> PaperID </th>
+          <th> Availability </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let bidPaper of bidPapers">
+          <td> {{bidPaper.userId}} </td>
+          <td> {{bidPaper.paperId}} </td>
+          <td> {{bidPaper.availability}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="item5">
+    <button class="btn btn-danger" (click)="goBack()"> Go Back </button>
+  </div>
+</div>

@@ -66,3 +66,25 @@ input {
   width: 20px;
   height: 20px;
 }
+
+.chair {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 20% 60% 20%;
+  grid-template-areas:
+  ". . ."
+  ". a ."
+  ". . .";
+}
+
+.chair_item1 {
+  grid-area: a;
+  align-self: center;
+  justify-self: center;
+}
+
+.chair_item1 button {
+  margin-top: 20px;
+  width: 100%;
+}

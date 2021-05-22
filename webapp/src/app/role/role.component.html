@@ -60,7 +60,12 @@
           <td> {{paper.title}} </td>
           <td> {{paper.finalized}} </td>
           <td> {{paper.accepted}} </td>
-          <td> <button class="btn btn-secondary" (click)="goToBidPaperPage(paper.id)"> Bid paper </button> </td>
+          <td>
+            <button class="btn btn-secondary"
+                    (click)="goToBidPaperPage(paper.id)">
+              Bid paper
+            </button>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -71,4 +76,17 @@
       <button class="btn btn-secondary" (click)="goToRolesPage()"> Go Back </button>
     </div>
   </div>
+
+  <div *ngIf="role === 'CHAIR'" class="chair">
+    <div class="chair_item1">
+      <button class="btn btn-primary" (click)="goToSendPaperToReviewerPage()"> Send paper to reviewer </button> <br>
+      <button class="btn btn-primary" (click)="goToRequestCloserEvaluationPage()"> Request closer evaluation </button> <br>
+      <button class="btn btn-primary" (click)="goToSendResultsPage()"> Send results </button> <br>
+      <button class="btn btn-primary" (click)="goToSelectPapersForSectionPage()"> Select papers for section </button> <br>
+      <button class="btn btn-danger" (click)="goToRolesPage()"> Go Back </button>
+    </div>
+  </div>
+
+  <div *ngIf="role === 'CO_CHAIR'" class="co_chair" [hidden]="goToSendPaperToReviewerPage()"> </div>
+
 </div>

@@ -14,14 +14,18 @@
     <button class="btn btn-secondary item3" (click)="goToRolePage()"> Go Back </button>
   </div>
 
-  <div class="item4">
+  <div class="item4" *ngIf="ok == true">
+    <b> You have already bid for this paper! </b>
+  </div>
+
+  <div class="item4" *ngIf="ok == false">
     <div class="dropdown">
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         <b> Availability </b>
         <span class="caret"></span> </button>
       <ul class="dropdown-menu">
         <li *ngFor="let availability of allPossibleAvailability">
-          <a (click)="goToRolePage()"> {{availability}} </a>
+          <a (click)="addAndGoToRolePage(availability)"> {{availability}} </a>
         </li>
       </ul>
     </div>

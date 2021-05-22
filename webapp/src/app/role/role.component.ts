@@ -15,6 +15,7 @@ export class RoleComponent implements OnInit {
   conferenceId: number = 0;
   role: string = '';
   username: string = '';
+
   papers: Array<Paper> = {} as Array<Paper>;
   finalPapersFromAConference: Array<Paper> = [];
 
@@ -26,7 +27,6 @@ export class RoleComponent implements OnInit {
     this.conferenceId = this.route.snapshot.queryParams.conferenceId;
     this.role = this.route.snapshot.queryParams.role;
     this.username = this.route.snapshot.queryParams.username;
-    this.getAllPapersOfAUserInAConference(this.userId, this.conferenceId);
 
     this.getAllPapersOfAUserInAConference(this.userId, this.conferenceId);
     this.getFinalPapersFromAConference(this.conferenceId);
@@ -72,7 +72,7 @@ export class RoleComponent implements OnInit {
   }
 
   dateOf(date: any) {
-    return `${date.monthValue}/${date.dayOfMonth}/${date.year}`;
+    return `${date.month}/${date.day}/${date.year}`;
   }
 
   goToBidPaperPage(paperId: number): void {
@@ -119,5 +119,28 @@ export class RoleComponent implements OnInit {
         conferenceId: this.conferenceId
       }
     }).then(_ => {});
+  }
+
+  goToSendPaperToReviewerPage(): void {
+    this.router.navigate(['sendPaperToReviewer'], {
+      queryParams: {
+        userId: this.userId,
+        conferenceId: this.conferenceId,
+        role: this.role,
+        username: this.username
+      }
+    }).then(_ => {});
+  }
+
+  goToRequestCloserEvaluationPage(): void {
+    this.router.navigate(['']).then(_ => {});
+  }
+
+  goToSendResultsPage(): void {
+    this.router.navigate(['']).then(_ => {});
+  }
+
+  goToSelectPapersForSectionPage(): void {
+    this.router.navigate(['']).then(_ => {});
   }
 }

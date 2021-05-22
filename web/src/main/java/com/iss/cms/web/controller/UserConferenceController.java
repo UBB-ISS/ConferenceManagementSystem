@@ -2,6 +2,7 @@ package com.iss.cms.web.controller;
 
 import com.iss.cms.core.domain.AppUser;
 import com.iss.cms.core.domain.Conference;
+import com.iss.cms.core.domain.Role;
 import com.iss.cms.core.domain.UserConference;
 import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.service.UserConferenceService;
@@ -101,5 +102,14 @@ public class UserConferenceController {
         UserConference user = this.userConferenceService.getUserConference(userId, conferenceId);
         logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method finished");
         return user;
+    }
+
+    @RequestMapping(value="/allUsersFromAGivenConferenceWithAGivenRole/{conferenceId}/{role}")
+    UsersDTO getAllUsersFromAGivenConferenceWithAGivenRole(@PathVariable int conferenceId, @PathVariable Role role) {
+        logger.trace("UserConferenceController - getAllUsersFromAGivenConference(): method entered");
+        List<AppUser> users = userConferenceService.getAllUsersFromAGivenConferenceWithAGivenRole(conferenceId, role);
+        UsersDTO usersDTO = new UsersDTO(userConverter.convertModelsToDTOs(users));
+        logger.trace("UserConferenceController - getAllUsersFromAGivenConference(): method finished -> " + usersDTO.toString());
+        return usersDTO;
     }
 }
