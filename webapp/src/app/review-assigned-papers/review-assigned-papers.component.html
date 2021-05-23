@@ -1,0 +1,33 @@
+<div class="parent">
+  <div class="wrapper">
+    <div class="item1">
+      <h3> Assigned papers </h3>
+      <p> You can give a qualifier to the following papers or make a recommendation </p>
+    </div>
+
+    <div class="item2">
+      <button class="btn btn-danger" (click)="goToRolePage()"> Go Back </button>
+    </div>
+
+    <div class="item3">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th> Title </th>
+          <th> </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let paper of papersReadyForReview">
+          <td> {{paper.title}} </td>
+          <td>
+            <button class="btn btn-secondary" (click)="goToGiveReviewPage(paper.id)"> Give review </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

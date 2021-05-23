@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,6 @@ public class PaperReviewService implements IPaperReviewService{
         logger.trace("PaperReviewService - addPaperReview(): method entered ->" + "reviewerId = " +
                 reviewerId + ", paperId = " + paperId + ", review = " + review +
                 ", qualifier = " + qualifier);
-
         Optional<AppUser> reviewer = userRepository.findById(reviewerId);
         if(reviewer.isEmpty()) {
             logger.trace("PaperReviewService: Reviewer id does not exist!");
@@ -64,7 +64,6 @@ public class PaperReviewService implements IPaperReviewService{
         }
 
         PaperReview paperReview = new PaperReview(reviewerId, paperId, review, qualifier);
-        System.out.println(paperReview.toString());
         paperReviewRepository.save(paperReview);
 
         logger.trace("PaperReviewService - addPaperReview(): method finished");
@@ -84,5 +83,40 @@ public class PaperReviewService implements IPaperReviewService{
 
         logger.trace("UserConferenceService - getReviewersForPaper(): method finished -> " + reviewers.toString());
         return reviewers;
+    }
+
+    @Override
+    @Transactional
+    public void updatePaperReview(int id, int reviewerId, int paperId, String recommendation, Qualifier qualifier) throws CMSException {
+        logger.trace("PaperReviewService - updatePaperReview: method entered");
+
+        paperReviewRepository.findById(id)
+                .ifPresentOrElse(
+                        (updatedPaperReview) -> {
+                            updatedPaperReview.setReviewerId(reviewerId);
+                            updatedPaperReview.setPaperId(paperId);
+                            updatedPaperReview.setRecommendation(recommendation);
+                            updatedPaperReview.setQualifier(qualifier);
+                        }, () -> {
+                            logger.trace("PaperReviewService - The PaperReview does not exist!");
+                            throw new CMSException("The PaperReview does not exist!");
+                        });
+
+        logger.trace("PaperReviewService - updatePaperReview: method finished");
+    }
+
+    @Override
+    public PaperReview findPaperReviewByReviewerIdAndPaperId(int reviewerId, int paperId) {
+        logger.trace("PaperReviewService - findPaperReviewByReviewerIdAndPaperId: method entered");
+
+        PaperReview paperReview = null;
+        for(PaperReview pr: paperReviewRepository.findAll()) {
+            if(pr.getReviewerId() == reviewerId && pr.getPaperId() == paperId) {
+                paperReview = pr;
+            }
+        }
+
+        logger.trace("PaperReviewService - findPaperReviewByReviewerIdAndPaperId: method finished");
+        return paperReview;
     }
 }

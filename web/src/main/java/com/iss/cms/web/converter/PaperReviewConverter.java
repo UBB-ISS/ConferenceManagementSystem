@@ -11,8 +11,9 @@ public class PaperReviewConverter extends BaseConverter<PaperReview, PaperReview
         PaperReview model = new PaperReview();
 
         model.setId(dto.getId());
+        model.setPaperId(dto.getPaperId());
         model.setReviewerId(dto.getReviewerId());
-        model.setReview(dto.getReview());
+        model.setRecommendation(dto.getRecommendation());
         model.setQualifier(dto.getQualifier());
 
         return model;
@@ -23,8 +24,9 @@ public class PaperReviewConverter extends BaseConverter<PaperReview, PaperReview
         PaperReviewDTO dto = new PaperReviewDTO();
 
         dto.setId(model.getId());
+        dto.setPaperId(model.getPaperId());
         dto.setReviewerId(model.getReviewerId());
-        dto.setReview(model.getReview());
+        dto.setRecommendation(model.getRecommendation());
         dto.setQualifier(model.getQualifier());
 
         return dto;

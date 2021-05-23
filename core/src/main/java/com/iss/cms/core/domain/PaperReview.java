@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -20,13 +18,14 @@ public class PaperReview implements Serializable {
 
     private int reviewerId;
     private int paperId;
-    private String review;
+    private String recommendation;
+    @Enumerated(EnumType.STRING)
     private Qualifier qualifier;
 
-    public PaperReview(int reviewerId, int paperId, String review, Qualifier qualifier) {
+    public PaperReview(int reviewerId, int paperId, String recommendation, Qualifier qualifier) {
         this.reviewerId = reviewerId;
         this.paperId = paperId;
-        this.review = review;
+        this.recommendation = recommendation;
         this.qualifier = qualifier;
     }
 }

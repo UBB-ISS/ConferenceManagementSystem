@@ -23,8 +23,12 @@ export class ReviewerPaperService {
     return this.httpClient.post(this.url + `availabilities`, new ReviewerPaper(0, userId, paperId, assigned, availability));
   }
 
-  changeStatus(id: number): Observable<any> {
-    return this.httpClient.put(this.url + `availabilities`, new ReviewerPaper(id, 0, 0,true, ''));
+  changeStatus(id: number, status: string): Observable<any> {
+    console.log("service");
+    console.log(id);
+    let reviewerPaper = new ReviewerPaper(id, 0, 0,true, status);
+    console.log(reviewerPaper);
+    return this.httpClient.put(this.url + `changeStatusForAvailability/${id}`, reviewerPaper);
   }
 
   findAvailabilityByUserId(userId: number, paperId: number): Observable<ReviewerPaper> {

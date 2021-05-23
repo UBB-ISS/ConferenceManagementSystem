@@ -9,7 +9,7 @@ import java.util.List;
 public interface IReviewerPaperService {
     List<ReviewerPaper> getAll();
 
-    List<ReviewerPaper> getAllFromAGivenConference(int conferenceId);
+    List<ReviewerPaper> getBidPapersFromAGivenConference(int conferenceId);
 
     void addAvailability(int userId, int paperId, boolean assigned, Availability availability) throws CMSException;
 

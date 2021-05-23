@@ -1,9 +1,11 @@
 package com.iss.cms.core.service;
 
 import com.iss.cms.core.domain.Availability;
+import com.iss.cms.core.domain.Paper;
 import com.iss.cms.core.domain.ReviewerPaper;
 import com.iss.cms.core.domain.UserConference;
 import com.iss.cms.core.exceptions.CMSException;
+import com.iss.cms.core.repository.PaperRepository;
 import com.iss.cms.core.repository.ReviewerPaperRepository;
 import com.iss.cms.core.repository.UserConferenceRepository;
 import org.slf4j.Logger;
@@ -25,6 +27,9 @@ public class ReviewerPaperService implements IReviewerPaperService {
     @Autowired
     private UserConferenceRepository userConferenceRepository;
 
+    @Autowired
+    private PaperRepository paperRepository;
+
     @Override
     public List<ReviewerPaper> getAll() {
         logger.trace("ReviewerPaper - getAll: method entered");
@@ -36,15 +41,24 @@ public class ReviewerPaperService implements IReviewerPaperService {
     }
 
     @Override
-    public List<ReviewerPaper> getAllFromAGivenConference(int conferenceId) {
+    public List<ReviewerPaper> getBidPapersFromAGivenConference(int conferenceId) {
         logger.trace("ReviewerPaper - getAllFromAGivenConference: method entered");
 
-        List<ReviewerPaper> all = new ArrayList<>();
-
         List<UserConference> userConferences = userConferenceRepository.findAllByConferenceID(conferenceId);
-        for(ReviewerPaper rp: reviewerPaperRepository.findAll()) {
-            for(UserConference us: userConferences) {
-                if(rp.getUserId() == us.getUserID() && !all.contains(rp)) {
+
+        List<Paper> papers = new ArrayList<>();
+        for(UserConference us: userConferences) {
+            for(Paper p: paperRepository.findAll()) {
+                if(p.isFinalized() && p.getUserConferenceId() == us.getId() && !papers.contains(p)) {
+                    papers.add(p);
+                }
+            }
+        }
+
+        List<ReviewerPaper> all = new ArrayList<>();
+        for(Paper p: papers) {
+            for(ReviewerPaper rp: reviewerPaperRepository.findAll()) {
+                if(rp.getPaperId() == p.getId() && !all.contains(rp)) {
                     all.add(rp);
                 }
             }
@@ -87,6 +101,8 @@ public class ReviewerPaperService implements IReviewerPaperService {
                             throw new CMSException("This availability does not exist!");
                         }
                 );
+
+        System.out.println("Service: " + reviewerPaperRepository.findById(id).toString());
 
         logger.trace("ReviewerPaper - changeStatus: method finished");
     }

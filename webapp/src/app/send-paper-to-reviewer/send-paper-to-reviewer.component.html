@@ -36,6 +36,7 @@
           <th> ReviewerID </th>
           <th> PaperID </th>
           <th> Availability </th>
+          <th> >< </th>
         </tr>
       </thead>
 
@@ -44,6 +45,11 @@
           <td> {{bidPaper.userId}} </td>
           <td> {{bidPaper.paperId}} </td>
           <td> {{bidPaper.availability}} </td>
+          <td>
+            <button class="btn btn-secondary"
+                    [disabled]="bidPaper.availability === 'REFUSE'"
+                    (click)="assignPaperToReviewer(bidPaper.userId, bidPaper.paperId, bidPaper.availability)"> Assign </button>
+          </td>
         </tr>
       </tbody>
     </table>

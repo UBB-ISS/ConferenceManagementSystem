@@ -13,6 +13,8 @@ import { BidProposalComponent } from "./bid-proposal/bid-proposal.component";
 import { AddConferenceComponent } from "./add-conference/add-conference.component";
 import { ChangeDeadlinesComponent } from "./change-deadlines/change-deadlines.component";
 import { SendPaperToReviewerComponent } from "./send-paper-to-reviewer/send-paper-to-reviewer.component";
+import { ReviewAssignedPapersComponent } from "./review-assigned-papers/review-assigned-papers.component";
+import {GiveReviewComponent} from "./give-review/give-review.component";
 
 const routes: Routes = [
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,7 +30,9 @@ const routes: Routes = [
   { path: 'bidProposal', component: BidProposalComponent },
   { path: 'addConference', component: AddConferenceComponent },
   { path: 'changeDeadlines', component: ChangeDeadlinesComponent },
-  { path: 'sendPaperToReviewer', component: SendPaperToReviewerComponent }
+  { path: 'sendPaperToReviewer', component: SendPaperToReviewerComponent },
+  { path: 'reviewAssignedPapers', component: ReviewAssignedPapersComponent },
+  { path: 'giveReview', component: GiveReviewComponent }
 ];
 
 @NgModule({

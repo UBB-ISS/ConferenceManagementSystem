@@ -42,18 +42,38 @@ public class PaperReviewController {
         return paperReviewConverter.convertModelToDTO(paperReviewService.findPaperReviewByID(id));
     }
 
-    @PostMapping("/paperReviews")
+    @PostMapping("/addPaperReview")
     public void addPaperReview(@RequestBody PaperReviewDTO paperReviewDTO) {
         PaperReview paperReview = paperReviewConverter.convertDTOToModel(paperReviewDTO);
         try {
             paperReviewService.addPaperReview(
                     paperReview.getReviewerId(),
                     paperReview.getPaperId(),
-                    paperReview.getReview(),
+                    paperReview.getRecommendation(),
                     paperReview.getQualifier()
             );
         } catch (CMSException e) {
+            System.out.println(e.getMessage());
             logger.trace(e.toString());
         }
+    }
+
+    @RequestMapping(value="/updatePaperReview", method = RequestMethod.PUT)
+    public void updatePaperReview(@RequestBody PaperReviewDTO paperReviewDTO) {
+        PaperReview paperReview = paperReviewConverter.convertDTOToModel(paperReviewDTO);
+        paperReviewService.updatePaperReview(paperReview.getId(), paperReview.getReviewerId(), paperReview.getPaperId(),
+                paperReview.getRecommendation(), paperReview.getQualifier());
+    }
+
+    @RequestMapping(value="/findPaperReviewByReviewerIdAndPaperId/{reviewerId}/{paperId}")
+    public PaperReviewDTO findPaperReviewByReviewerIdAndPaperId(@PathVariable int reviewerId, @PathVariable int paperId) {
+        PaperReview paperReview = paperReviewService.findPaperReviewByReviewerIdAndPaperId(reviewerId, paperId);
+
+        PaperReviewDTO paperReviewDTO;
+        if(paperReview == null) paperReviewDTO = null;
+        else
+            paperReviewDTO = paperReviewConverter.convertModelToDTO(paperReview);
+
+        return paperReviewDTO;
     }
 }

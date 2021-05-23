@@ -33,5 +33,9 @@ export class PaperService {
     return this.httpClient.post(this.url + `papers/update`,
       new Paper(paperId, 0, title, keywords, paperText, abstractText, finalized, accepted))
   }
+
+  getPapersReadyForReview(userId: number): Observable<Papers> {
+    return this.httpClient.get<Papers>(this.url + `papersReadyForReview/${userId}`);
+  }
 }
 

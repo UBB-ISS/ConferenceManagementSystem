@@ -13,6 +13,6 @@ public class PaperReviewDTO {
     private int id;
     private int reviewerId;
     private int paperId;
-    private String review;
+    private String recommendation;
     private Qualifier qualifier;
 }

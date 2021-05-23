@@ -1,10 +1,12 @@
 package com.iss.cms.core.service;
 
 import com.iss.cms.core.domain.Paper;
+import com.iss.cms.core.domain.ReviewerPaper;
 import com.iss.cms.core.domain.Role;
 import com.iss.cms.core.domain.UserConference;
 import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.repository.PaperRepository;
+import com.iss.cms.core.repository.ReviewerPaperRepository;
 import com.iss.cms.core.repository.UserConferenceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +24,13 @@ public class PaperService implements IPaperService{
     private static final Logger logger = LoggerFactory.getLogger(PaperService.class);
 
     @Autowired
-    PaperRepository paperRepository;
+    private PaperRepository paperRepository;
 
     @Autowired
     UserConferenceRepository userConferenceRepository;
+
+    @Autowired
+    ReviewerPaperRepository reviewerPaperRepository;
 
     @Override
     public List<Paper> getPapers() {
@@ -141,4 +146,15 @@ public class PaperService implements IPaperService{
                 );
     }
 
+    @Override
+    public List<Paper> getPapersReadyForReview(int userId) {
+        List<Paper> papersReadyForReview = new ArrayList<>();
+        for(ReviewerPaper rp: reviewerPaperRepository.findAll()) {
+           if(rp.isAssigned() && rp.getUserId() == userId) {
+               papersReadyForReview.add(paperRepository.findById(rp.getPaperId()).get());
+           }
+        }
+
+        return papersReadyForReview;
+    }
 }

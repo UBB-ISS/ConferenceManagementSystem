@@ -17,12 +17,15 @@ import { BidProposalComponent } from './bid-proposal/bid-proposal.component';
 import { AddConferenceComponent } from './add-conference/add-conference.component';
 import { ChangeDeadlinesComponent } from './change-deadlines/change-deadlines.component';
 import { SendPaperToReviewerComponent } from './send-paper-to-reviewer/send-paper-to-reviewer.component';
+import { ReviewAssignedPapersComponent } from './review-assigned-papers/review-assigned-papers.component';
+import { GiveReviewComponent } from './give-review/give-review.component';
 
 import { UserService } from "./shared/user.service";
 import { ConferenceService } from "./shared/conference.service";
 import { PaperService } from "./shared/paper.service";
 import { UserConferenceService } from "./shared/user-conference.service";
 import { ReviewerPaperService } from "./shared/reviewer-paper.service";
+import { PaperReviewService } from "./shared/paper-review.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { ReviewerPaperService } from "./shared/reviewer-paper.service";
     BidProposalComponent,
     AddConferenceComponent,
     ChangeDeadlinesComponent,
-    SendPaperToReviewerComponent
+    SendPaperToReviewerComponent,
+    ReviewAssignedPapersComponent,
+    GiveReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,8 @@ import { ReviewerPaperService } from "./shared/reviewer-paper.service";
               ConferenceService,
               PaperService,
               UserConferenceService,
-              ReviewerPaperService
+              ReviewerPaperService,
+              PaperReviewService
              ],
   bootstrap: [AppComponent]
 })

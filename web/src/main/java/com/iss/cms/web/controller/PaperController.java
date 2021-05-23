@@ -91,4 +91,10 @@ public class PaperController {
                     paper.isAccepted()
             );
     }
+
+    @RequestMapping(value="/papersReadyForReview/{userId}")
+    public PapersDTO getPapersReadyForReview(@PathVariable int userId) {
+        List<Paper> papers = paperService.getPapersReadyForReview(userId);
+        return new PapersDTO(paperConverter.convertModelsToDTOs(papers));
+    }
 }

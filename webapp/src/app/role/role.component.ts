@@ -107,8 +107,14 @@ export class RoleComponent implements OnInit {
           });
   }
 
-  goToReviewPapersPage(): void {
-
+  goToReviewAssignedPapersPage(): void {
+    this.router.navigate(['reviewAssignedPapers'], {
+      queryParams: {
+        userId: this.userId,
+        conferenceId: this.conferenceId,
+        username: this.username
+      }
+    }).then(_ => {});
   }
 
   goToRolesPage(): void {

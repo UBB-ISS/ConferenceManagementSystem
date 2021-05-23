@@ -15,4 +15,8 @@ public interface IPaperReviewService {
     void addPaperReview(int reviewerId, int paperId, String review, Qualifier qualifier) throws CMSException;
 
     List<AppUser> getReviewersForPaper(int paperId);
+
+    void updatePaperReview(int id, int reviewerId, int paperId, String recommendation, Qualifier qualifier) throws CMSException;
+
+    PaperReview findPaperReviewByReviewerIdAndPaperId(int reviewerId, int paperId);
 }

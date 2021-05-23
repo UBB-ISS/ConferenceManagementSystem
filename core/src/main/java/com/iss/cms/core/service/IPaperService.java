@@ -31,4 +31,6 @@ public interface IPaperService {
             String abstractText,
             boolean finalized,
             boolean accepted);
+
+    List<Paper> getPapersReadyForReview(int userId);
 }

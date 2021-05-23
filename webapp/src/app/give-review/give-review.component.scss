@@ -1,0 +1,51 @@
+.wrapper {
+  height: 80%;
+  display: grid;
+  grid-template-columns: 5% 30% 30% 30% 5%;
+  grid-template-rows: 5% 15% 20% 10% 30% 10% 10%;
+  grid-template-areas:
+  ". . . . ."
+  ". a . c ."
+  ". b b b ."
+  ". . . . ."
+  ". d d d ."
+  ". . f . ."
+  ". . e . .";
+}
+
+.item1 {
+  grid-area: a;
+  align-self: end;
+}
+
+.item2 {
+  grid-area: b;
+  text-align: center;
+}
+
+.item3 {
+  grid-area: c;
+  justify-self: end;
+  align-self: end;
+  margin-bottom: 10px;
+}
+
+.item4 {
+  grid-area: d;
+  align-self: end;
+  justify-self: center;
+  width: 60%;
+  margin-top: 100px;
+}
+
+/*.item5 {
+  grid-area: f;
+  justify-self: center;
+  align-self: center;
+}*/
+
+.item5 {
+  grid-area: e;
+  align-self: end;
+  justify-self: center;
+}
