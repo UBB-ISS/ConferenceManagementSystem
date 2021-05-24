@@ -17,13 +17,11 @@ export class PaperReviewService {
   }
 
   addPaperReview(reviewerId: number, paperId: number, recommendation: string, qualifier: string): Observable<any> {
-    console.log("add");
     return this.httpClient.post(this.url + `addPaperReview`,
       new PaperReview(0, reviewerId, paperId, recommendation, qualifier));
   }
 
   updatePaperReview(id: number, reviewerId: number, paperId: number, recommendation: string, qualifier: string): Observable<any> {
-    console.log("update");
     return this.httpClient.put(this.url + `updatePaperReview`,
       new PaperReview(id, reviewerId, paperId, recommendation, qualifier));
   }

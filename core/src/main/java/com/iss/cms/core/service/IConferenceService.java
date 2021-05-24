@@ -2,7 +2,6 @@ package com.iss.cms.core.service;
 
 import com.iss.cms.core.domain.Conference;
 import com.iss.cms.core.exceptions.CMSException;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.List;

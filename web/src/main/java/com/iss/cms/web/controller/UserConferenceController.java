@@ -5,7 +5,7 @@ import com.iss.cms.core.domain.Conference;
 import com.iss.cms.core.domain.Role;
 import com.iss.cms.core.domain.UserConference;
 import com.iss.cms.core.exceptions.CMSException;
-import com.iss.cms.core.service.UserConferenceService;
+import com.iss.cms.core.service.IUserConferenceService;
 import com.iss.cms.web.converter.ConferenceConverter;
 import com.iss.cms.web.converter.UserConferenceConverter;
 import com.iss.cms.web.converter.UserConverter;
@@ -27,7 +27,7 @@ public class UserConferenceController {
     private static final Logger logger = LoggerFactory.getLogger(UserConferenceConverter.class);
 
     @Autowired
-    private UserConferenceService userConferenceService;
+    private IUserConferenceService userConferenceService;
 
     @Autowired
     private UserConferenceConverter userConferenceConverter;
@@ -97,11 +97,21 @@ public class UserConferenceController {
 
 
     @RequestMapping(value="/getUserConference/{userId}/{conferenceId}")
-    UserConference  getUserConference(@PathVariable int userId, @PathVariable int conferenceId) {
+    UserConferenceDTO  getUserConference(@PathVariable int userId, @PathVariable int conferenceId) {
         logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method entered");
         UserConference user = this.userConferenceService.getUserConference(userId, conferenceId);
+        UserConferenceDTO userConferenceDTO = this.userConferenceConverter.convertModelToDTO(user);
         logger.trace("UserConferenceController - getAllRolesForAGivenUserInAGivenConference: method finished");
-        return user;
+        return userConferenceDTO;
+    }
+
+    @RequestMapping(value="/getUserConferenceWithRole/{userId}/{conferenceId}/{role}")
+    UserConferenceDTO getUserConferenceWithRole(@PathVariable int userId, @PathVariable int conferenceId, @PathVariable Role role) {
+        logger.trace("UserConferenceController - getUserConferenceWithRole: method entered");
+        UserConference userConference = this.userConferenceService.getUserConferenceWithRole(userId, conferenceId, role);
+        UserConferenceDTO userConferenceDTO = userConferenceConverter.convertModelToDTO(userConference);
+        logger.trace("UserConferenceController - getUserConferenceWithRole: method finished");
+        return userConferenceDTO;
     }
 
     @RequestMapping(value="/allUsersFromAGivenConferenceWithAGivenRole/{conferenceId}/{role}")

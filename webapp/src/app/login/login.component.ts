@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
   }
 
   goToConferences(): void {
-    console.log("login:");
-    console.log(this.user);
     this.router.navigate(['conferences'], {
       queryParams: {
         userId: this.user.id,

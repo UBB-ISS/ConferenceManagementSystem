@@ -25,14 +25,11 @@ export class SubmitProposalComponent implements OnInit {
     this.conferenceId = this.route.snapshot.queryParams.conferenceId;
     this.role = this.route.snapshot.queryParams.role;
     this.username = this.route.snapshot.queryParams.username;
-    console.log('submit-proposal');
-    console.log(this.userId);
-    console.log(this.conferenceId);
-    this.userConferenceService.getUserConference(this.userId, this.conferenceId)
+
+    this.userConferenceService.getUserConferenceWithRole(this.userId, this.conferenceId, this.role)
       .subscribe(
         userConference => {
           this.userConferenceId = userConference.id;
-          console.log(userConference);
         }
       )
   }
@@ -53,7 +50,6 @@ export class SubmitProposalComponent implements OnInit {
     this.paperService.addPaper(this.userConferenceId, title, keywords, paperText, abstractText, false, false)
       .subscribe(
           (result: any) => {
-          console.log(result);
           this.goToRolePage();
         }
       );

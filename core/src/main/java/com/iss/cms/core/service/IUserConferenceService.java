@@ -24,4 +24,8 @@ public interface IUserConferenceService {
     List<Conference> getAllConferencesFromAGivenUser(int userId);
 
     List<AppUser> getAllUsersFromAGivenConferenceWithAGivenRole(int conferenceId, Role role);
+
+    UserConference getUserConference(int userId, int conferenceId);
+
+    UserConference getUserConferenceWithRole(int userId, int conferenceId, Role role);
 }

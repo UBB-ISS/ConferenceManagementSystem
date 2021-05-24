@@ -35,7 +35,6 @@ export class ChangeDeadlinesComponent implements OnInit {
     let biddingPhase: Date = new Date(bidding);
     let submitPhase: Date = new Date(submit);
     let reviewPhase: Date = new Date(review);
-    console.log(biddingPhase);
 
     this.conferenceService.changeDeadlines(this.conferenceId, biddingPhase, submitPhase, reviewPhase).subscribe(
       () => { this.goToConferencesPage(); })

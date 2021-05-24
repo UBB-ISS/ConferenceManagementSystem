@@ -18,4 +18,8 @@ export class UserConferenceService {
   getAllUsersFromAGivenConferenceWithAGivenRole(conferenceId: number, role: string): Observable<Users> {
     return this.httpClient.get<Users>(this.url + `allUsersFromAGivenConferenceWithAGivenRole/${conferenceId}/${role}`);
   }
+
+  getUserConferenceWithRole(userId: number, conferenceId: number, role: string): Observable<UserConference> {
+    return this.httpClient.get<UserConference>(this.url + `getUserConferenceWithRole/${userId}/${conferenceId}/${role}`);
+  }
 }

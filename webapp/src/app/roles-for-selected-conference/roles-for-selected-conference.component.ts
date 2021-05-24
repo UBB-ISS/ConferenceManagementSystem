@@ -29,7 +29,6 @@ export class RolesForSelectedConferenceComponent implements OnInit {
     this.userService.getAllRolesForAGivenUserInAGivenConference(userId, conferenceId).subscribe(
       (roles) => {
         this.roles = roles;
-        console.log(roles);
       }
     )
   }

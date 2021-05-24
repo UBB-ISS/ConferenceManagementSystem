@@ -64,11 +64,11 @@ public class PaperController {
         return papersDTO;
     }
 
-    @RequestMapping(value="/finalPapersFromAConference/{conferenceId}")
-    public PapersDTO getFinalPapersFromAConference(@PathVariable int conferenceId) {
+    @RequestMapping(value="/finalPapersFromAConference/{userId}/{conferenceId}")
+    public PapersDTO getFinalPapersFromAConference(@PathVariable int userId, @PathVariable int conferenceId) {
         logger.trace("PaperController - getFinalPapersFromAConference(): method entered");
 
-        List<Paper> papers = paperService.getFinalPapersFromAConference(conferenceId);
+        List<Paper> papers = paperService.getFinalPapersFromAConference(userId, conferenceId);
         PapersDTO papersDTO = new PapersDTO(paperConverter.convertModelsToDTOs(papers));
 
         logger.trace("PaperController - getFinalPapersFromAConference(): method finished");

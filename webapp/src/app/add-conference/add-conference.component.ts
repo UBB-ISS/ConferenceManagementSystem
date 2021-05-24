@@ -25,9 +25,6 @@ export class AddConferenceComponent implements OnInit {
     let biddingPhase: Date = new Date(bidding);
     let submitPhase: Date = new Date(submit);
     let reviewPhase: Date = new Date(review);
-    console.log(date);
-    console.log(dateConference);
-    console.log(biddingPhase);
 
     this.conferenceService.addConference(name, price, dateConference, biddingPhase, submitPhase, reviewPhase).subscribe(
       () => { this.goToConferencesPage(); })

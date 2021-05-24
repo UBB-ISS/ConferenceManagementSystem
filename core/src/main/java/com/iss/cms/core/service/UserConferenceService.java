@@ -147,10 +147,19 @@ public class UserConferenceService implements IUserConferenceService {
         return null;
     }
 
+    @Override
     public UserConference getUserConference(int userId, int conferenceId) {
         return this.userConferenceRepository.findAllByConferenceID(conferenceId)
                 .stream()
                 .filter( userConference -> userConference.getUserID() == userId)
+                .findFirst().get();
+    }
+
+    @Override
+    public UserConference getUserConferenceWithRole(int userId, int conferenceId, Role role) {
+        return this.userConferenceRepository.findAllByConferenceID(conferenceId)
+                .stream()
+                .filter(userConference -> userConference.getUserID() == userId && userConference.getRole() == role)
                 .findFirst().get();
     }
 

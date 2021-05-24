@@ -103,13 +103,19 @@ public class PaperService implements IPaperService{
     }
 
     @Override
-    public List<Paper> getFinalPapersFromAConference(int conferenceId) {
+    public List<Paper> getFinalPapersFromAConference(int userId, int conferenceId) {
         logger.trace("PaperService - getFinalPapersFromAConference: method entered");
+
+        UserConference uc = null;
 
         List<Integer> userConferenceIds = new ArrayList<>();
         for(UserConference userConference: userConferenceRepository.findAll()) {
             if(userConference.getConferenceID() == conferenceId) {
                 userConferenceIds.add(userConference.getId());
+
+                if(userConference.getUserID() == userId && userConference.getRole() == Role.AUTHOR) {
+                    uc = userConference;
+                }
             }
         }
 
@@ -117,7 +123,13 @@ public class PaperService implements IPaperService{
         for(int id: userConferenceIds) {
             for(Paper paper: paperRepository.findAll()) {
                 if(paper.getUserConferenceId() == id && paper.isFinalized()) {
-                    papers.add(paper);
+                    if(uc != null) {
+                        if(uc.getId() != paper.getUserConferenceId()) {
+                            papers.add(paper);
+                        }
+                    } else {
+                        papers.add(paper);
+                    }
                 }
             }
         }

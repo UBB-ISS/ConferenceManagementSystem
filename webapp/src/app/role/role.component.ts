@@ -29,59 +29,78 @@ export class RoleComponent implements OnInit {
     this.username = this.route.snapshot.queryParams.username;
 
     this.getAllPapersOfAUserInAConference(this.userId, this.conferenceId);
-    this.getFinalPapersFromAConference(this.conferenceId);
+    this.getFinalPapersFromAConference(this.userId, this.conferenceId);
   }
 
   getAllPapersOfAUserInAConference(userId: number, conferenceId: number): void {
     this.paperService.getPapersOfAUserInAConference(userId, conferenceId)
       .subscribe((papers) => {
         this.papers = papers.papersDTO;
-        console.log(this.papers);
       })
-  }
-
-  goToCreateProposalPage(): void {
-    this.router.navigate(['submitProposal'], {
-      queryParams: {
-        userId: this.userId,
-        conferenceId: this.conferenceId,
-        role: this.role,
-        username: this.username
-      }
-    }).then(_ => {});
-  }
-
-  goToUpdateProposalPage(paperId: number): void {
-    // @ts-ignore
-    const {abstractText, accepted, finalized, keywords, paperText, title} = this.papers.find(({id}) => id === paperId);
-    this.router.navigate(['updateProposal'], {
-      queryParams: {
-        paperId: paperId,
-        userId: this.userId,
-        conferenceId: this.conferenceId,
-        role: this.role,
-        username: this.username,
-        title: title,
-        keywords: keywords,
-        abstractText: abstractText,
-        paperText: paperText,
-        accepted: accepted,
-        finalized: finalized
-      }
-    }).then(_ => {});
   }
 
   dateOf(date: any) {
     return `${date.month}/${date.day}/${date.year}`;
   }
 
+  goToCreateProposalPage(): void {
+    this.conferenceService.getConferenceById(this.conferenceId).subscribe(
+      (conference) => {
+        let ok = true;
+        if (this.dateOf(conference.submitPaperDeadline) < new Date().toLocaleDateString()) {
+          window.alert("Submit phase finished");
+          ok = false;
+        }
+
+        if (ok) {
+          this.router.navigate(['submitProposal'], {
+            queryParams: {
+              userId: this.userId,
+              conferenceId: this.conferenceId,
+              role: this.role,
+              username: this.username
+            }
+          }).then(_ => {
+          });
+        }
+      });
+  }
+
+  goToUpdateProposalPage(paperId: number): void {
+    this.conferenceService.getConferenceById(this.conferenceId).subscribe(
+      (conference) => {
+        let ok = true;
+        if (this.dateOf(conference.submitPaperDeadline) < new Date().toLocaleDateString()) {
+          window.alert("Submit phase finished");
+          ok = false;
+        }
+
+        if(ok) {
+          // @ts-ignore
+          const {abstractText, accepted, finalized, keywords, paperText, title} = this.papers.find(({id}) => id === paperId);
+          this.router.navigate(['updateProposal'], {
+            queryParams: {
+              paperId: paperId,
+              userId: this.userId,
+              conferenceId: this.conferenceId,
+              role: this.role,
+              username: this.username,
+              title: title,
+              keywords: keywords,
+              abstractText: abstractText,
+              paperText: paperText,
+              accepted: accepted,
+              finalized: finalized
+            }
+          }).then(_ => {});
+        }
+      });
+  }
+
   goToBidPaperPage(paperId: number): void {
     this.conferenceService.getConferenceById(this.conferenceId).subscribe(
       (conference) => {
         let ok = true;
-        console.log('a');
-        console.log(this.dateOf(conference.biddingPhaseDeadline));
-        console.log(new Date().toLocaleDateString());
         if(this.dateOf(conference.biddingPhaseDeadline) < new Date().toLocaleDateString()) {
           window.alert("Bidding phase finished");
           ok = false;
@@ -100,21 +119,40 @@ export class RoleComponent implements OnInit {
       });
   }
 
-  getFinalPapersFromAConference(conferenceId: number): void {
+  /*getFinalPapersFromAConference(conferenceId: number): void {
     this.paperService.getFinalPapersFromAConference(conferenceId)
-        .subscribe((acceptedPapers) => {
-            this.finalPapersFromAConference = acceptedPapers.papersDTO;
+        .subscribe((finalPapers) => {
+            this.finalPapersFromAConference = finalPapers.papersDTO;
           });
+  }*/
+
+  getFinalPapersFromAConference(userId: number, conferenceId: number): void {
+    this.paperService.getFinalPapersFromAConference(userId, conferenceId)
+      .subscribe((finalPapers) => {
+        this.finalPapersFromAConference = finalPapers.papersDTO;
+      });
   }
 
   goToReviewAssignedPapersPage(): void {
-    this.router.navigate(['reviewAssignedPapers'], {
-      queryParams: {
-        userId: this.userId,
-        conferenceId: this.conferenceId,
-        username: this.username
-      }
-    }).then(_ => {});
+    this.conferenceService.getConferenceById(this.conferenceId).subscribe(
+      (conference) => {
+        let ok = true;
+        if (this.dateOf(conference.reviewPaperDeadline) < new Date().toLocaleDateString()) {
+          window.alert("Review phase finished");
+          ok = false;
+        }
+
+        if (ok) {
+          this.router.navigate(['reviewAssignedPapers'], {
+            queryParams: {
+              userId: this.userId,
+              conferenceId: this.conferenceId,
+              username: this.username
+            }
+          }).then(_ => {
+          });
+        }
+      });
   }
 
   goToRolesPage(): void {

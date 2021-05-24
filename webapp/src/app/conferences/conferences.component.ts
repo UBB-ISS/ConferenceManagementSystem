@@ -19,9 +19,7 @@ export class ConferencesComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParams.userId;
     this.username = this.route.snapshot.queryParams.username;
-    console.log("conferences:");
-    console.log(this.id);
-    console.log(this.username);
+
     this.getAllConferences();
   }
 
@@ -29,7 +27,6 @@ export class ConferencesComponent implements OnInit {
     this.service.getAllConferences().subscribe(
       (conferences) => {
         this.conferences = conferences.conferencesDTO;
-        console.log(this.conferences);
       }
     );
   }

@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs";
 
 import { User } from "../shared/user.model";
 import { ReviewerPaper } from "../shared/reviewer-paper.model";
 import { UserConferenceService } from "../shared/user-conference.service";
 import { ReviewerPaperService } from "../shared/reviewer-paper.service";
-import { PaperService } from "../shared/paper.service";
-import { Paper } from "../shared/paper.model";
 
 @Component({
   selector: 'app-send-paper-to-reviewer',
@@ -24,16 +21,13 @@ export class SendPaperToReviewerComponent implements OnInit {
   bidPapers: Array<ReviewerPaper> = {} as Array<ReviewerPaper>;
 
   constructor(private router: Router, private route: ActivatedRoute,
-              private userConferenceService: UserConferenceService, private reviewerPaperService: ReviewerPaperService,
-              private paperService: PaperService) { }
+              private userConferenceService: UserConferenceService, private reviewerPaperService: ReviewerPaperService) { }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.queryParams.userId;
     this.conferenceId = this.route.snapshot.queryParams.conferenceId;
     this.role = this.route.snapshot.queryParams.role;
     this.username = this.route.snapshot.queryParams.username;
-
-    console.log('bbb');
 
     this.getAllReviewers();
     this.getAllBidPapers();
@@ -79,8 +73,6 @@ export class SendPaperToReviewerComponent implements OnInit {
       (availability) => {
         if(availability.assigned) window.alert("You have already assigned this paper!");
         else {
-          console.log('sendpaper');
-          console.log(availability.id);
           this.reviewerPaperService.changeStatus(availability.id, status).subscribe(()=>{
             window.alert("You have successfully assigned this paper!");
           })

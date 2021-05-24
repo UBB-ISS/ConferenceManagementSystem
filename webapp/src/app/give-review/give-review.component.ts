@@ -64,9 +64,6 @@ export class GiveReviewComponent implements OnInit {
   }
 
   addOrUpdateQualifier(qualifier: string, recommendation: string): void {
-    console.log(this.paperReviews)
-    console.log(this.userId)
-    console.log(this.paperId)
     if(qualifier == '') {
       window.alert("You cannot assign a review without a qualifier!");
     } else {
@@ -77,10 +74,6 @@ export class GiveReviewComponent implements OnInit {
           operation = 'update';
           this.paperReviewService.findPaperReviewByReviewerIdAndPaperId(this.userId, this.paperId).subscribe(
             (paperReview) => {
-              console.log('aaa');
-              console.log(paperReview.id);
-              console.log(recommendation);
-              console.log(qualifier);
               this.paperReviewService.updatePaperReview(paperReview.id, this.userId, this.paperId, recommendation, qualifier).subscribe(
                 () => {
                   this.getPaperReviews();
@@ -90,10 +83,6 @@ export class GiveReviewComponent implements OnInit {
       }
 
       if(operation === '') {
-        console.log('bbb');
-        console.log(this.paperId);
-        console.log(recommendation);
-        console.log(qualifier);
         this.paperReviewService.addPaperReview(this.userId, this.paperId, recommendation, qualifier).subscribe(
           () => {
             this.getPaperReviews();

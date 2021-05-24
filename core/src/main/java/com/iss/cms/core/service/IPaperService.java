@@ -21,7 +21,7 @@ public interface IPaperService {
 
     List<Paper> getPapersOfAUserInAConference(int userId, int conferenceId);
 
-    List<Paper> getFinalPapersFromAConference(int conferenceId);
+    List<Paper> getFinalPapersFromAConference(int userId, int conferenceId);
 
     void updatePaper(
             int id,

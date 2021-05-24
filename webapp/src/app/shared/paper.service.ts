@@ -15,8 +15,8 @@ export class PaperService {
     return this.httpClient.get<Papers>(this.url + `papersOfAUserInAConference/${userId}/${conferenceId}`);
   }
 
-  getFinalPapersFromAConference(conferenceId: number): Observable<Papers> {
-    return this.httpClient.get<Papers>(this.url + `finalPapersFromAConference/${conferenceId}`);
+  getFinalPapersFromAConference(userId: number, conferenceId: number): Observable<Papers> {
+    return this.httpClient.get<Papers>(this.url + `finalPapersFromAConference/${userId}/${conferenceId}`);
   }
 
   getPaperById(paperId: number): Observable<Paper> {

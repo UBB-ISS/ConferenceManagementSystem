@@ -53,7 +53,6 @@ export class UpdateProposalComponent implements OnInit {
     this.paperService.updatePaper(this.paperId, this.title, this.paperText, this.abstractText, this.keywords, this.finalized, this.accepted)
       .subscribe(
         result => {
-          console.log(result);
           this.goToViewProposalsPage();
         }
       )
