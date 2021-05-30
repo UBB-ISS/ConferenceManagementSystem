@@ -9,7 +9,6 @@ import { LoginComponent } from './login/login.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { ConferencesComponent } from './conferences/conferences.component';
 import { SubmitProposalComponent } from './submit-proposal/submit-proposal.component';
-import { ViewProposalsComponent } from './view-proposals/view-proposals.component';
 import { RolesForSelectedConferenceComponent } from './roles-for-selected-conference/roles-for-selected-conference.component';
 import { UpdateProposalComponent } from './update-proposal/update-proposal.component';
 import { RoleComponent } from './role/role.component';
@@ -19,6 +18,8 @@ import { ChangeDeadlinesComponent } from './change-deadlines/change-deadlines.co
 import { SendPaperToReviewerComponent } from './send-paper-to-reviewer/send-paper-to-reviewer.component';
 import { ReviewAssignedPapersComponent } from './review-assigned-papers/review-assigned-papers.component';
 import { GiveReviewComponent } from './give-review/give-review.component';
+import { SendResultsComponent } from './send-results/send-results.component';
+import { ViewResultsComponent } from './view-results/view-results.component';
 
 import { UserService } from "./shared/user.service";
 import { ConferenceService } from "./shared/conference.service";
@@ -26,6 +27,7 @@ import { PaperService } from "./shared/paper.service";
 import { UserConferenceService } from "./shared/user-conference.service";
 import { ReviewerPaperService } from "./shared/reviewer-paper.service";
 import { PaperReviewService } from "./shared/paper-review.service";
+import { ResultService } from "./shared/result.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +36,6 @@ import { PaperReviewService } from "./shared/paper-review.service";
     CreateAccountComponent,
     ConferencesComponent,
     SubmitProposalComponent,
-    ViewProposalsComponent,
     RolesForSelectedConferenceComponent,
     UpdateProposalComponent,
     RoleComponent,
@@ -43,7 +44,9 @@ import { PaperReviewService } from "./shared/paper-review.service";
     ChangeDeadlinesComponent,
     SendPaperToReviewerComponent,
     ReviewAssignedPapersComponent,
-    GiveReviewComponent
+    GiveReviewComponent,
+    SendResultsComponent,
+    ViewResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { PaperReviewService } from "./shared/paper-review.service";
               PaperService,
               UserConferenceService,
               ReviewerPaperService,
-              PaperReviewService
+              PaperReviewService,
+              ResultService
              ],
   bootstrap: [AppComponent]
 })

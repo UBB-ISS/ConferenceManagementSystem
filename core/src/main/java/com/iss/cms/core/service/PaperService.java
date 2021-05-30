@@ -1,17 +1,14 @@
 package com.iss.cms.core.service;
 
-import com.iss.cms.core.domain.Paper;
-import com.iss.cms.core.domain.ReviewerPaper;
-import com.iss.cms.core.domain.Role;
-import com.iss.cms.core.domain.UserConference;
+import com.iss.cms.core.domain.*;
 import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.repository.PaperRepository;
 import com.iss.cms.core.repository.ReviewerPaperRepository;
 import com.iss.cms.core.repository.UserConferenceRepository;
+import com.iss.cms.core.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +28,9 @@ public class PaperService implements IPaperService{
 
     @Autowired
     ReviewerPaperRepository reviewerPaperRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public List<Paper> getPapers() {
@@ -159,14 +159,63 @@ public class PaperService implements IPaperService{
     }
 
     @Override
-    public List<Paper> getPapersReadyForReview(int userId) {
-        List<Paper> papersReadyForReview = new ArrayList<>();
-        for(ReviewerPaper rp: reviewerPaperRepository.findAll()) {
+    public List<Paper> getPapersReadyForReview(int userId, int conferenceId) {
+        List<Paper> papers = new ArrayList<>();
+
+        /*for(ReviewerPaper rp: reviewerPaperRepository.findAll()) {
            if(rp.isAssigned() && rp.getUserId() == userId) {
-               papersReadyForReview.add(paperRepository.findById(rp.getPaperId()).get());
+               AppUser appUser = userRepository.findById(rp.getUserId()).get();
+               List<UserConference> userConferences = userConferenceRepository.findAllByUserID(appUser.getId());
+
+               for(UserConference uc: userConferences) {
+                   if(uc.getConferenceID() == conferenceId) {
+                       papersReadyForReview.add(paperRepository.findById(rp.getPaperId()).get());
+                   }
+               }
            }
+        }*/
+
+        for(ReviewerPaper rp: reviewerPaperRepository.findAll()) {
+            if(rp.isAssigned() && rp.getUserId() == userId) {
+                papers.add(paperRepository.findById(rp.getPaperId()).get());
+            }
         }
 
+        List<Paper> papersReadyForReview = new ArrayList<>();
+        for(Paper paper: papers) {
+            UserConference userConference = userConferenceRepository.findById(paper.getUserConferenceId()).get();
+            if(userConference.getConferenceID() == conferenceId) {
+                papersReadyForReview.add(paper);
+            }
+        }
+
+        System.out.println("Service: " + papersReadyForReview);
         return papersReadyForReview;
+    }
+
+    @Override
+    public String getAuthorForAGivenPaper(int paperId) {
+        String author = null;
+
+        Paper paper = findPaperById(paperId);
+        UserConference userConference = userConferenceRepository.findById(paper.getUserConferenceId()).get();
+        AppUser user = userRepository.findById(userConference.getUserID()).get();
+
+        author = user.getUsername();
+
+        return "\"" + author + "\"";
+    }
+
+    @Override
+    public int getAuthorIDForAGivenPaper(int paperId) {
+        int authorID = -1;
+
+        Paper paper = findPaperById(paperId);
+        UserConference userConference = userConferenceRepository.findById(paper.getUserConferenceId()).get();
+        AppUser user = userRepository.findById(userConference.getUserID()).get();
+
+        authorID = user.getId();
+
+        return authorID;
     }
 }

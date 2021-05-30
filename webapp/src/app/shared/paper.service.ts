@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import {Paper, Papers} from "./paper.model";
+import { Paper, Papers } from "./paper.model";
 
 @Injectable()
 export class PaperService {
@@ -34,8 +34,15 @@ export class PaperService {
       new Paper(paperId, 0, title, keywords, paperText, abstractText, finalized, accepted))
   }
 
-  getPapersReadyForReview(userId: number): Observable<Papers> {
-    return this.httpClient.get<Papers>(this.url + `papersReadyForReview/${userId}`);
+  getPapersReadyForReview(userId: number, conferenceId: number): Observable<Papers> {
+    return this.httpClient.get<Papers>(this.url + `papersReadyForReview/${userId}/${conferenceId}`);
+  }
+
+  getAuthorForAGivenPaper(paperId: number): Observable<string> {
+    return this.httpClient.get<string>(this.url + `getAuthorForAGivenPaper/${paperId}`);
+  }
+
+  getAuthorIDForAGivenPaper(paperId: number): Observable<number> {
+    return this.httpClient.get<number>(this.url + `getAuthorIDForAGivenPaper/${paperId}`);
   }
 }
-

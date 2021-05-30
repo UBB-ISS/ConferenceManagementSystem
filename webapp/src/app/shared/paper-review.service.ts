@@ -29,4 +29,8 @@ export class PaperReviewService {
   findPaperReviewByReviewerIdAndPaperId(reviewerId: number, paperId: number): Observable<PaperReview> {
     return this.httpClient.get<PaperReview>(this.url + `findPaperReviewByReviewerIdAndPaperId/${reviewerId}/${paperId}`);
   }
+
+  allPaperReviewFromAGivenConference(conferenceId: number): Observable<PaperReviews> {
+    return this.httpClient.get<PaperReviews>(this.url + `allPaperReviewFromAGivenConference/${conferenceId}`);
+  }
 }

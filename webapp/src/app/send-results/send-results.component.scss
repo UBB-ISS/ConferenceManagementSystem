@@ -1,12 +1,13 @@
 .wrapper {
-  height: 80%;
+  height: 70%;
   display: grid;
+  grid-template-rows: 10% 20% 60% 10%;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 20% 60% 20%;
   grid-template-areas:
-    ". a . c ."
-    ". b b b ."
-    ". . . . . ";
+  ". . . . ."
+  ". a . b ."
+  ". c c c ."
+  ". . . . .";
 }
 
 .item1 {
@@ -16,11 +17,14 @@
 
 .item2 {
   grid-area: b;
-  align-self: start;
+  justify-self: end;
+  align-self: end;
 }
 
 .item3 {
   grid-area: c;
-  justify-self: end;
-  align-self: end;
+}
+
+.item3 button {
+  margin-left: 15%;
 }

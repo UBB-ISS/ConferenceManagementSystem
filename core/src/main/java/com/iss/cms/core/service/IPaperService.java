@@ -32,5 +32,9 @@ public interface IPaperService {
             boolean finalized,
             boolean accepted);
 
-    List<Paper> getPapersReadyForReview(int userId);
+    List<Paper> getPapersReadyForReview(int userId, int conferenceId);
+
+    String getAuthorForAGivenPaper(int paperId);
+
+    int getAuthorIDForAGivenPaper(int paperId);
 }

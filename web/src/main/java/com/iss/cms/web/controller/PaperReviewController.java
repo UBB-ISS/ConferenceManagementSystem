@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PaperReviewController {
     private static final Logger logger = LoggerFactory.getLogger(PaperReviewController.class);
@@ -75,5 +77,11 @@ public class PaperReviewController {
             paperReviewDTO = paperReviewConverter.convertModelToDTO(paperReview);
 
         return paperReviewDTO;
+    }
+
+    @RequestMapping(value="/allPaperReviewFromAGivenConference/{conferenceId}")
+    public PaperReviewsDTO allPaperReviewFromAGivenConference(@PathVariable int conferenceId) {
+        List<PaperReview> paperReviews = paperReviewService.allPaperReviewFromAGivenConference(conferenceId);
+        return new PaperReviewsDTO(paperReviewConverter.convertModelsToDTOs(paperReviews));
     }
 }

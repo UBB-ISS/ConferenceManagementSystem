@@ -46,8 +46,25 @@ export class RoleComponent implements OnInit {
   goToCreateProposalPage(): void {
     this.conferenceService.getConferenceById(this.conferenceId).subscribe(
       (conference) => {
-        let ok = true;
+        /*let ok = true;
         if (this.dateOf(conference.submitPaperDeadline) < new Date().toLocaleDateString()) {
+          window.alert("Submit phase finished");
+          ok = false;
+        }*/
+
+        let reviewDate = this.dateOf(conference.submitPaperDeadline).split('/');
+        let currentDate = new Date().toLocaleDateString().split('/');
+
+        let okk = true, ok = true;
+        if(reviewDate[2] > currentDate[2]) okk = false;
+        else {
+          if(reviewDate[2] == currentDate[2] && reviewDate[0] > currentDate[0]) okk = false;
+          else {
+            if(reviewDate[0] == currentDate[0] && reviewDate[1] >= currentDate[1]) okk = false;
+          }
+        }
+
+        if (okk) {
           window.alert("Submit phase finished");
           ok = false;
         }
@@ -66,11 +83,62 @@ export class RoleComponent implements OnInit {
       });
   }
 
+  goToViewResultsPage(): void {
+    this.conferenceService.getConferenceById(this.conferenceId).subscribe(
+      (conference) => {
+        let reviewDate = this.dateOf(conference.reviewPaperDeadline).split('/');
+        let currentDate = new Date().toLocaleDateString().split('/');
+
+        let okk = true, ok = true;
+        if(reviewDate[2] > currentDate[2]) okk = false;
+        else {
+          if(reviewDate[2] == currentDate[2] && reviewDate[0] > currentDate[0]) okk = false;
+          else {
+            if(reviewDate[0] == currentDate[0] && reviewDate[1] >= currentDate[1]) okk = false;
+          }
+        }
+
+        if (!okk) {
+          window.alert("Review phase not yet finished");
+          ok = false;
+        }
+
+        if (ok) {
+          this.router.navigate(['viewResults'], {
+            queryParams: {
+              userId: this.userId,
+              conferenceId: this.conferenceId,
+              role: this.role,
+              username: this.username
+            }
+          }).then(_ => {
+          });
+        }
+      });
+  }
+
   goToUpdateProposalPage(paperId: number): void {
     this.conferenceService.getConferenceById(this.conferenceId).subscribe(
       (conference) => {
-        let ok = true;
+        /*let ok = true;
         if (this.dateOf(conference.submitPaperDeadline) < new Date().toLocaleDateString()) {
+          window.alert("Submit phase finished");
+          ok = false;
+        }*/
+
+        let reviewDate = this.dateOf(conference.submitPaperDeadline).split('/');
+        let currentDate = new Date().toLocaleDateString().split('/');
+
+        let okk = true, ok = true;
+        if(reviewDate[2] > currentDate[2]) okk = false;
+        else {
+          if(reviewDate[2] == currentDate[2] && reviewDate[0] > currentDate[0]) okk = false;
+          else {
+            if(reviewDate[0] == currentDate[0] && reviewDate[1] >= currentDate[1]) okk = false;
+          }
+        }
+
+        if (okk) {
           window.alert("Submit phase finished");
           ok = false;
         }
@@ -100,8 +168,27 @@ export class RoleComponent implements OnInit {
   goToBidPaperPage(paperId: number): void {
     this.conferenceService.getConferenceById(this.conferenceId).subscribe(
       (conference) => {
+/*
         let ok = true;
         if(this.dateOf(conference.biddingPhaseDeadline) < new Date().toLocaleDateString()) {
+          window.alert("Bidding phase finished");
+          ok = false;
+        }
+*/
+
+        let reviewDate = this.dateOf(conference.biddingPhaseDeadline).split('/');
+        let currentDate = new Date().toLocaleDateString().split('/');
+
+        let okk = true, ok = true;
+        if(reviewDate[2] > currentDate[2]) okk = false;
+        else {
+          if(reviewDate[2] == currentDate[2] && reviewDate[0] > currentDate[0]) okk = false;
+          else {
+            if(reviewDate[0] == currentDate[0] && reviewDate[1] >= currentDate[1]) okk = false;
+          }
+        }
+
+        if (okk) {
           window.alert("Bidding phase finished");
           ok = false;
         }
@@ -118,13 +205,6 @@ export class RoleComponent implements OnInit {
         }
       });
   }
-
-  /*getFinalPapersFromAConference(conferenceId: number): void {
-    this.paperService.getFinalPapersFromAConference(conferenceId)
-        .subscribe((finalPapers) => {
-            this.finalPapersFromAConference = finalPapers.papersDTO;
-          });
-  }*/
 
   getFinalPapersFromAConference(userId: number, conferenceId: number): void {
     this.paperService.getFinalPapersFromAConference(userId, conferenceId)
@@ -181,7 +261,39 @@ export class RoleComponent implements OnInit {
   }
 
   goToSendResultsPage(): void {
-    this.router.navigate(['']).then(_ => {});
+    this.conferenceService.getConferenceById(this.conferenceId).subscribe(
+      (conference) => {
+        let ok = true;
+
+        let reviewDate = this.dateOf(conference.reviewPaperDeadline).split('/');
+        let currentDate = new Date().toLocaleDateString().split('/');
+
+        let okk = true;
+        if(reviewDate[2] > currentDate[2]) okk = false;
+        else {
+          if(reviewDate[2] == currentDate[2] && reviewDate[0] > currentDate[0]) okk = false;
+          else {
+            if(reviewDate[0] == currentDate[0] && reviewDate[1] >= currentDate[1]) okk = false;
+          }
+        }
+
+        if (!okk) {
+          window.alert("Review phase not yet finished");
+          ok = false;
+        }
+
+        if (ok) {
+          this.router.navigate(['sendResults'], {
+            queryParams: {
+              userId: this.userId,
+              conferenceId: this.conferenceId,
+              role: this.role,
+              username: this.username
+            }
+          }).then(_ => {
+          });
+        }
+      });
   }
 
   goToSelectPapersForSectionPage(): void {

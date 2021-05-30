@@ -1,6 +1,7 @@
 package com.iss.cms.core.service;
 
 import com.iss.cms.core.domain.AppUser;
+import com.iss.cms.core.domain.Paper;
 import com.iss.cms.core.domain.PaperReview;
 import com.iss.cms.core.domain.Qualifier;
 import com.iss.cms.core.exceptions.CMSException;
@@ -19,4 +20,6 @@ public interface IPaperReviewService {
     void updatePaperReview(int id, int reviewerId, int paperId, String recommendation, Qualifier qualifier) throws CMSException;
 
     PaperReview findPaperReviewByReviewerIdAndPaperId(int reviewerId, int paperId);
+
+    List<PaperReview> allPaperReviewFromAGivenConference(int conferenceId);
 }

@@ -4,6 +4,7 @@ import com.iss.cms.core.domain.*;
 import com.iss.cms.core.exceptions.CMSException;
 import com.iss.cms.core.repository.PaperRepository;
 import com.iss.cms.core.repository.PaperReviewRepository;
+import com.iss.cms.core.repository.UserConferenceRepository;
 import com.iss.cms.core.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,9 @@ public class PaperReviewService implements IPaperReviewService{
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserConferenceRepository userConferenceRepository;
 
     @Override
     public List<PaperReview> getPaperReviews() {
@@ -118,5 +122,20 @@ public class PaperReviewService implements IPaperReviewService{
 
         logger.trace("PaperReviewService - findPaperReviewByReviewerIdAndPaperId: method finished");
         return paperReview;
+    }
+
+    @Override
+    public List<PaperReview> allPaperReviewFromAGivenConference(int conferenceId) {
+        List<PaperReview> paperReviews = new ArrayList<>();
+
+        for(PaperReview paperReview: paperReviewRepository.findAll()) {
+            Paper paper = paperRepository.findById(paperReview.getPaperId()).get();
+            UserConference userConference = userConferenceRepository.findById(paper.getUserConferenceId()).get();
+            if(userConference.getConferenceID() == conferenceId) {
+                paperReviews.add(paperReview);
+            }
+        }
+
+        return paperReviews;
     }
 }

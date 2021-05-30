@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="item1">
+    <h2> Reviewed Papers </h2>
+  </div>
+
+  <div class="item2">
+    <button class="btn btn-danger" (click)="goToRolePage()"> Go Back </button>
+  </div>
+
+  <div class="item3">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th> Title </th>
+        <th> Qualifier </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let result of results">
+        <td> {{result.title}} </td>
+        <td> {{result.qualifier}} </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

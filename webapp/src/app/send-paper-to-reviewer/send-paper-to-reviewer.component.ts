@@ -5,6 +5,7 @@ import { User } from "../shared/user.model";
 import { ReviewerPaper } from "../shared/reviewer-paper.model";
 import { UserConferenceService } from "../shared/user-conference.service";
 import { ReviewerPaperService } from "../shared/reviewer-paper.service";
+import { PaperService } from "../shared/paper.service";
 
 @Component({
   selector: 'app-send-paper-to-reviewer',
@@ -21,7 +22,8 @@ export class SendPaperToReviewerComponent implements OnInit {
   bidPapers: Array<ReviewerPaper> = {} as Array<ReviewerPaper>;
 
   constructor(private router: Router, private route: ActivatedRoute,
-              private userConferenceService: UserConferenceService, private reviewerPaperService: ReviewerPaperService) { }
+              private userConferenceService: UserConferenceService, private reviewerPaperService: ReviewerPaperService,
+              private paperService: PaperService) { }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.queryParams.userId;
@@ -65,6 +67,12 @@ export class SendPaperToReviewerComponent implements OnInit {
     this.reviewerPaperService.getAllFromAGivenConference(this.conferenceId).subscribe(
       (papers) => {
         this.bidPapers = papers.reviewerPapersDTO;
+
+        for(const bidPaper of this.bidPapers) {
+          this.paperService.getPaperById(bidPaper.paperId).subscribe(paper => {
+            bidPaper.paperTitle = paper.title;
+          })
+        }
       });
   }
 

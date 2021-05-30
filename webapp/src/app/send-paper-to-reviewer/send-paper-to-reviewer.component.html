@@ -34,7 +34,7 @@
       <thead>
         <tr>
           <th> ReviewerID </th>
-          <th> PaperID </th>
+          <th> Paper Title </th>
           <th> Availability </th>
           <th> >< </th>
         </tr>
@@ -43,7 +43,7 @@
       <tbody>
         <tr *ngFor="let bidPaper of bidPapers">
           <td> {{bidPaper.userId}} </td>
-          <td> {{bidPaper.paperId}} </td>
+          <td> {{bidPaper.paperTitle}} </td>
           <td> {{bidPaper.availability}} </td>
           <td>
             <button class="btn btn-secondary"

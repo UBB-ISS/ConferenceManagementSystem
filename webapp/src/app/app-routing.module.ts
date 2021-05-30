@@ -5,7 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { ConferencesComponent } from './conferences/conferences.component';
 import { SubmitProposalComponent } from './submit-proposal/submit-proposal.component';
-import { ViewProposalsComponent } from './view-proposals/view-proposals.component';
 import { RolesForSelectedConferenceComponent } from './roles-for-selected-conference/roles-for-selected-conference.component';
 import { UpdateProposalComponent } from './update-proposal/update-proposal.component';
 import { RoleComponent } from "./role/role.component";
@@ -14,7 +13,9 @@ import { AddConferenceComponent } from "./add-conference/add-conference.componen
 import { ChangeDeadlinesComponent } from "./change-deadlines/change-deadlines.component";
 import { SendPaperToReviewerComponent } from "./send-paper-to-reviewer/send-paper-to-reviewer.component";
 import { ReviewAssignedPapersComponent } from "./review-assigned-papers/review-assigned-papers.component";
-import {GiveReviewComponent} from "./give-review/give-review.component";
+import { GiveReviewComponent } from "./give-review/give-review.component";
+import { SendResultsComponent } from "./send-results/send-results.component";
+import { ViewResultsComponent } from "./view-results/view-results.component";
 
 const routes: Routes = [
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,7 +23,6 @@ const routes: Routes = [
   { path: 'createAccount', component: CreateAccountComponent },
   { path: 'conferences', component: ConferencesComponent },
   { path: 'submitProposal', component: SubmitProposalComponent },
-  { path: 'viewProposals', component: ViewProposalsComponent },
   { path: 'roles', component: RolesForSelectedConferenceComponent },
   { path: 'updateProposal', component: UpdateProposalComponent },
   { path: 'role', component: RoleComponent },
@@ -32,7 +32,9 @@ const routes: Routes = [
   { path: 'changeDeadlines', component: ChangeDeadlinesComponent },
   { path: 'sendPaperToReviewer', component: SendPaperToReviewerComponent },
   { path: 'reviewAssignedPapers', component: ReviewAssignedPapersComponent },
-  { path: 'giveReview', component: GiveReviewComponent }
+  { path: 'giveReview', component: GiveReviewComponent },
+  { path: 'sendResults', component: SendResultsComponent },
+  { path: 'viewResults', component: ViewResultsComponent }
 ];
 
 @NgModule({

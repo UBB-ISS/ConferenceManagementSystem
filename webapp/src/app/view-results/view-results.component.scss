@@ -1,0 +1,30 @@
+.wrapper {
+  height: 70%;
+  display: grid;
+  grid-template-rows: 10% 20% 60% 10%;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-areas:
+  ". . . . ."
+  ". a . b ."
+  ". c c c ."
+  ". . . . .";
+}
+
+.item1 {
+  grid-area: a;
+  align-self: end;
+}
+
+.item2 {
+  grid-area: b;
+  justify-self: end;
+  align-self: end;
+}
+
+.item3 {
+  grid-area: c;
+}
+
+.item3 button {
+  margin-left: 15%;
+}

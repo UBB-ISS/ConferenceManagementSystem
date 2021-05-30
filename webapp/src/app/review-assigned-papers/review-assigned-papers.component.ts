@@ -24,7 +24,7 @@ export class ReviewAssignedPapersComponent implements OnInit {
     this.conferenceId = this.route.snapshot.queryParams.conferenceId;
     this.username = this.route.snapshot.queryParams.username;
 
-    this.getPapersReadyForReview(this.userId);
+    this.getPapersReadyForReview(this.userId, this.conferenceId);
   }
 
   goToRolePage(): void {
@@ -38,8 +38,8 @@ export class ReviewAssignedPapersComponent implements OnInit {
     }).then(_ => {});
   }
 
-  getPapersReadyForReview(userId: number): void {
-    this.paperService.getPapersReadyForReview(userId).subscribe(
+  getPapersReadyForReview(userId: number, conferenceId: number): void {
+    this.paperService.getPapersReadyForReview(userId, conferenceId).subscribe(
       (papers) => {
         this.papersReadyForReview = papers.papersDTO;
       });

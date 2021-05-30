@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <div class="item1">
+    <h2> Send results </h2>
+    <p> Send the reviewed papers to their authors </p>
+  </div>
+
+  <div class="item2">
+    <button class="btn btn-danger" (click)="goToRolePage()"> Go Back </button>
+  </div>
+
+  <div class="item3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th> Title </th>
+          <th> Qualifier </th>
+          <th> Author </th>
+          <th> </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let paperReview of paperReviewsFromConference">
+          <td> {{paperReview.paperTitle}} </td>
+          <td> {{paperReview.qualifier}} </td>
+          <td> {{paperReview.authorName}} </td>
+          <td>
+            <button class="btn btn-secondary" (click)="addResult(paperReview.paperId, paperReview.qualifier, paperReview.authorID)">
+              Send result
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

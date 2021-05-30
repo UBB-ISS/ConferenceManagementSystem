@@ -92,9 +92,19 @@ public class PaperController {
             );
     }
 
-    @RequestMapping(value="/papersReadyForReview/{userId}")
-    public PapersDTO getPapersReadyForReview(@PathVariable int userId) {
-        List<Paper> papers = paperService.getPapersReadyForReview(userId);
+    @RequestMapping(value="/papersReadyForReview/{userId}/{conferenceId}")
+    public PapersDTO getPapersReadyForReview(@PathVariable int userId, @PathVariable int conferenceId) {
+        List<Paper> papers = paperService.getPapersReadyForReview(userId, conferenceId);
         return new PapersDTO(paperConverter.convertModelsToDTOs(papers));
+    }
+
+    @RequestMapping(value="/getAuthorForAGivenPaper/{paperId}")
+    public String getAuthorForAGivenPaper(@PathVariable int paperId) {
+        return paperService.getAuthorForAGivenPaper(paperId);
+    }
+
+    @RequestMapping(value="/getAuthorIDForAGivenPaper/{paperId}")
+    public int getAuthorIDForAGivenPaper(@PathVariable int paperId) {
+        return paperService.getAuthorIDForAGivenPaper(paperId);
     }
 }

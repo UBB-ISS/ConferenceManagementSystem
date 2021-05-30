@@ -5,6 +5,8 @@ export class ReviewerPaper {
   assigned: boolean;
   availability: string;
 
+  paperTitle?: string;
+
   constructor(id= 0, userId: number, paperId: number, assigned: boolean, availability: string) {
     this.id = id;
     this.userId = userId;
