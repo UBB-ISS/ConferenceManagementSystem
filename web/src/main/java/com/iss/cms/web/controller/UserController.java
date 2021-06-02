@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @RestController
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-    void createAccount(@RequestBody UserDTO userDTO) throws CMSException {
+    void createAccount(@RequestBody UserDTO userDTO) throws CMSException, MessagingException {
         logger.trace("UserController - createAccount(): method entered -> " + userDTO.toString());
 
         AppUser appUser = userConverter.convertDTOToModel(userDTO);

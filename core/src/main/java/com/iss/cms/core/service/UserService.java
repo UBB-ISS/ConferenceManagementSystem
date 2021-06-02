@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,7 +67,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void createAccount(String name, String email, String username, String website, String affiliation, String password) throws CMSException {
+    public void createAccount(String name, String email, String username, String website, String affiliation, String password) throws CMSException, MessagingException {
         logger.trace("UserService - createAccount(): method entered -> " +
                 "name = " + name + ", email = " + email + ", username = " + username + ", website = " + website +
                 ", affiliation = " + affiliation + ", password = " + password);
@@ -81,7 +82,7 @@ public class UserService implements IUserService {
 
         AppUser appUser = new AppUser(name, email, username, website, affiliation, password);
         userRepository.save(appUser);
-
+        MailService.sendCreatedAccountMail(email, username, password);
         logger.trace("UserService - createAccount(): method finished -> " + appUser.toString());
     }
 

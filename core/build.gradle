@@ -18,6 +18,7 @@ dependencies {
     compile group: 'com.zaxxer', name: 'HikariCP', version: "$hikariVersion"
 
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: "$jaxbapiVersion"
+    compile 'javax.mail:mail:1.4.7'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 repositories {
