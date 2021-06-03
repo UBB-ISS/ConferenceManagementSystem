@@ -10,7 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.Multipart;
 import java.util.List;
 
 @RestController
@@ -51,6 +54,17 @@ public class PaperController {
         {
             logger.trace(e.toString());
         }
+    }
+
+    @RequestMapping("/papers/uploadFile")
+    public void handleFileUpload(@RequestParam("formData")MultipartFile file, RedirectAttributes redirectAttributes){
+        try{
+            //paperService.uploadFile(file);
+            logger.trace("PaperController - handleFileUpload(): method entered");
+        } catch (CMSException e){
+            logger.trace(e.toString());
+        }
+        logger.trace("PaperController - handleFileUpload(): method entered");
     }
 
     @RequestMapping(value="/papersOfAUserInAConference/{userId}/{conferenceId}")

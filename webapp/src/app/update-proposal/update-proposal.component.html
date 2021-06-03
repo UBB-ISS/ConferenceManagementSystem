@@ -29,6 +29,18 @@
       <div class="form-group">
         <label class="form-label" for="keywords" > New Finalized </label>
         <input [checked]="finalized === true" class="form-control" type="checkbox" (change)="this.finalized = !this.finalized"  autocomplete="off">
+        <input type="file" class="file-input"
+               (change)="onFileSelected($event)" #fileUpload>
+
+        <div class="file-upload">
+
+          {{fileName || "No file uploaded yet."}}
+
+          <button mat-mini-fab color="primary" class="upload-btn"
+                  (click)="fileUpload.click()">
+            Attach File
+          </button>
+        </div>
       </div>
 
      <!-- <div class="form-group">

@@ -45,4 +45,8 @@ export class PaperService {
   getAuthorIDForAGivenPaper(paperId: number): Observable<number> {
     return this.httpClient.get<number>(this.url + `getAuthorIDForAGivenPaper/${paperId}`);
   }
+
+  uploadFile(formData: any): void{
+    this.httpClient.post("papers/uploadFile", formData);
+  }
 }

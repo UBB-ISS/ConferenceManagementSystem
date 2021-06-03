@@ -19,6 +19,7 @@ export class UpdateProposalComponent implements OnInit {
   paperText: string = '';
   abstractText: string = '';
   keywords: string = '';
+  fileName: string = '';
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -36,6 +37,7 @@ export class UpdateProposalComponent implements OnInit {
     this.paperText = this.route.snapshot.queryParams.paperText;
     this.abstractText = this.route.snapshot.queryParams.abstractText;
     this.keywords = this.route.snapshot.queryParams.keywords;
+    this.fileName = this.route.snapshot.queryParams.fileName;
   }
 
   goToViewProposalsPage(): void {
@@ -47,6 +49,16 @@ export class UpdateProposalComponent implements OnInit {
         username: this.username
       }
     }).then(_ => {});
+  }
+
+  onFileSelected(event: any){
+    const file:File = event.target.files[0];
+    if(file){
+      this.fileName = file.name;
+      const formData = new FormData();
+      formData.append("thumbnail", file);
+      this.paperService.uploadFile(formData)
+    }
   }
 
   updatePaper() {
