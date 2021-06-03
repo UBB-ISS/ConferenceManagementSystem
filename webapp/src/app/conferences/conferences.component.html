@@ -30,7 +30,7 @@
           <td> {{dateOf(conference.biddingPhaseDeadline)}} </td>
           <td> {{dateOf(conference.submitPaperDeadline)}} </td>
           <td> {{dateOf(conference.reviewPaperDeadline)}} </td>
-          <td> <button [disabled]="isDisable(conference.id)" (click)="payConference(conference.id)"> Pay fee </button> </td>
+          <td> <button (click)="payConference(conference.id)"> Pay fee </button> </td>
           <td *ngIf="username == 'admin'">
             <button class="btn btn-secondary" (click)="goToChangeDeadlinesPage(conference.id)"> Change Deadlines </button>
           </td>
