@@ -122,4 +122,13 @@ public class UserConferenceController {
         logger.trace("UserConferenceController - getAllUsersFromAGivenConference(): method finished -> " + usersDTO.toString());
         return usersDTO;
     }
+
+    @RequestMapping(value="/payConference/{userId}/{conferenceId}", method = RequestMethod.GET)
+    void payConference(@PathVariable int userId, @PathVariable int conferenceId) {
+        logger.trace("UserConferenceController - payConference(): method entered");
+        System.out.println("Controller: ");
+        userConferenceService.payFeeForUser(userId, conferenceId);
+        System.out.println("Controller: finished ");
+        logger.trace("UserConferenceController - payConference: method finished");
+    }
 }

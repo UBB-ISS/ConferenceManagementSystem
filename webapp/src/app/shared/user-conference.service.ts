@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { UserConference } from "./user-conference.model";
+import {UserConference, UserConferences} from "./user-conference.model";
 import { Users } from "./user.model";
 
 @Injectable()
@@ -21,5 +21,11 @@ export class UserConferenceService {
 
   getUserConferenceWithRole(userId: number, conferenceId: number, role: string): Observable<UserConference> {
     return this.httpClient.get<UserConference>(this.url + `getUserConferenceWithRole/${userId}/${conferenceId}/${role}`);
+  }
+
+  updatePaymentStatus(conferenceId: number, userId: number): Observable<any> {
+    console.log("service: " + conferenceId + " " + userId);
+    console.log(typeof userId);
+    return this.httpClient.get(this.url + `payConference/${userId}/${conferenceId}`);
   }
 }

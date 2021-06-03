@@ -19,7 +19,7 @@ public interface IUserConferenceService {
 
     List<String> getAllRolesForAGivenUserInAGivenConference(int userId, int conferenceId);
     
-    void payFeeForUser(int userId, int conferenceId);
+    void payFeeForUser(int userId, int conferenceId) throws CMSException;
 
     List<Conference> getAllConferencesFromAGivenUser(int userId);
 
@@ -28,4 +28,5 @@ public interface IUserConferenceService {
     UserConference getUserConference(int userId, int conferenceId);
 
     UserConference getUserConferenceWithRole(int userId, int conferenceId, Role role);
+
 }

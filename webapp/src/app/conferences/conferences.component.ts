@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Conference } from "../shared/conference.model";
 import { ConferenceService } from "../shared/conference.service";
+import {UserConferenceService} from "../shared/user-conference.service";
+import {UserConference} from "../shared/user-conference.model";
+import {User} from "../shared/user.model";
 
 @Component({
   selector: 'app-conferences',
@@ -14,7 +17,7 @@ export class ConferencesComponent implements OnInit {
   id: number = 0;
   username: string = '';
 
-  constructor(private service: ConferenceService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private service: ConferenceService, private userConferenceService: UserConferenceService,private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParams.userId;
@@ -29,6 +32,19 @@ export class ConferencesComponent implements OnInit {
         this.conferences = conferences.conferencesDTO;
       }
     );
+  }
+
+  isDisable(conferenceId: number): boolean {
+    let ok: boolean = false;
+
+    let userConference: UserConference;
+    this.userConferenceService.getUserConference(this.id, conferenceId).subscribe(
+      (uc) => {
+        userConference = uc;
+        ok = uc.paid;
+      });
+
+    return ok;
   }
 
   goToRolesPage(id: number): void {
@@ -62,5 +78,10 @@ export class ConferencesComponent implements OnInit {
         conferenceId: conferenceId
       }
     }).then(_ => {});
+  }
+
+  payConference(conferenceId: number) {
+    console.log("userconference: " + conferenceId + " " + this.id);
+    this.userConferenceService.updatePaymentStatus(conferenceId, +this.id).subscribe(() => {window.alert("haha");});
   }
 }
