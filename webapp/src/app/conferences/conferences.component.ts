@@ -34,27 +34,27 @@ export class ConferencesComponent implements OnInit {
     );
   }
 
-  isDisable(conferenceId: number): boolean {
-    let ok: boolean = false;
-
+  goToRolesPage(id: number): void {
+    let ok = false;
     let userConference: UserConference;
-    this.userConferenceService.getUserConference(this.id, conferenceId).subscribe(
+    this.userConferenceService.getUserConference(this.id, id).subscribe(
       (uc) => {
         userConference = uc;
         ok = uc.paid;
+
+        if(!ok)
+          window.alert("You have to pay first!")
+        else
+        {
+          this.router.navigate(['roles'], {
+            queryParams: {
+              userId: this.id,
+              username: this.username,
+              conferenceId: id
+            }
+          }).then(_ => {});
+        }
       });
-
-    return ok;
-  }
-
-  goToRolesPage(id: number): void {
-    this.router.navigate(['roles'], {
-      queryParams: {
-        userId: this.id,
-        username: this.username,
-        conferenceId: id
-      }
-    }).then(_ => {});
   }
 
   goToAddConferencePage() {
@@ -82,6 +82,18 @@ export class ConferencesComponent implements OnInit {
 
   payConference(conferenceId: number) {
     console.log("userconference: " + conferenceId + " " + this.id);
-    this.userConferenceService.updatePaymentStatus(conferenceId, +this.id).subscribe(() => {window.alert("haha");});
+
+    let ok = false;
+    let userConference: UserConference;
+    this.userConferenceService.getUserConference(this.id, conferenceId).subscribe(
+      (uc) => {
+        userConference = uc;
+        ok = uc.paid;
+
+        if(ok)
+          window.alert("Already paid!")
+        else
+          this.userConferenceService.updatePaymentStatus(conferenceId, +this.id).subscribe(() => {window.alert("Successfully paid!");});
+      });
   }
 }
