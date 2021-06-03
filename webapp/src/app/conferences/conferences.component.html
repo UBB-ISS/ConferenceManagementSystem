@@ -17,6 +17,7 @@
           <th> Bidding Phase Deadline </th>
           <th> Submit Phase Deadline </th>
           <th> Review Phase Deadline </th>
+          <th> Pay </th>
           <th *ngIf="username == 'admin'"> </th>
         </tr>
       </thead>
@@ -29,6 +30,7 @@
           <td> {{dateOf(conference.biddingPhaseDeadline)}} </td>
           <td> {{dateOf(conference.submitPaperDeadline)}} </td>
           <td> {{dateOf(conference.reviewPaperDeadline)}} </td>
+          <td> <button (click)="payConference(conference.id)"> Pay fee </button> </td>
           <td *ngIf="username == 'admin'">
             <button class="btn btn-secondary" (click)="goToChangeDeadlinesPage(conference.id)"> Change Deadlines </button>
           </td>

@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,15 +131,27 @@ public class UserConferenceService implements IUserConferenceService {
         return roles;
     }
 
-    public void payFeeForUser(int userId, int conferenceId) {
-        logger.trace("UserConferenceService - payFeeForUser(): method entered -> userId = " + userId);
+    @Override
+    @Transactional
+    public void payFeeForUser(int userId, int conferenceId) throws CMSException {
+        logger.trace("UserConferenceService - payFeeForUser(): method entered");
+
+        System.out.println("Service: " + userId + conferenceId);
+        boolean ok = false;
 
         List<UserConference> userConferences = userConferenceRepository.findAllByUserID(userId);
         for(UserConference userConference: userConferences) {
             if(userConference.getConferenceID() == conferenceId) {
                 userConference.setPaid(true);
+                ok = true;
             }
         }
+
+        if(!ok) {
+            throw new CMSException("aaaaa");
+        }
+
+        System.out.println("Service: finished");
         logger.trace("UserConferenceService - payFeeForUser(): method entered");
     }
 
@@ -180,4 +193,6 @@ public class UserConferenceService implements IUserConferenceService {
         logger.trace("UserConferenceService - getAllUsersFromAGivenConferenceWithAGivenRole: method finished");
         return users;
     }
+
+
 }

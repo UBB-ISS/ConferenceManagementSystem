@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Conference } from "../shared/conference.model";
 import { ConferenceService } from "../shared/conference.service";
+import {UserConferenceService} from "../shared/user-conference.service";
+import {UserConference} from "../shared/user-conference.model";
+import {User} from "../shared/user.model";
 
 @Component({
   selector: 'app-conferences',
@@ -14,7 +17,7 @@ export class ConferencesComponent implements OnInit {
   id: number = 0;
   username: string = '';
 
-  constructor(private service: ConferenceService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private service: ConferenceService, private userConferenceService: UserConferenceService,private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParams.userId;
@@ -32,13 +35,26 @@ export class ConferencesComponent implements OnInit {
   }
 
   goToRolesPage(id: number): void {
-    this.router.navigate(['roles'], {
-      queryParams: {
-        userId: this.id,
-        username: this.username,
-        conferenceId: id
-      }
-    }).then(_ => {});
+    let ok = false;
+    let userConference: UserConference;
+    this.userConferenceService.getUserConference(this.id, id).subscribe(
+      (uc) => {
+        userConference = uc;
+        ok = uc.paid;
+
+        if(!ok)
+          window.alert("You have to pay first!")
+        else
+        {
+          this.router.navigate(['roles'], {
+            queryParams: {
+              userId: this.id,
+              username: this.username,
+              conferenceId: id
+            }
+          }).then(_ => {});
+        }
+      });
   }
 
   goToAddConferencePage() {
@@ -62,5 +78,22 @@ export class ConferencesComponent implements OnInit {
         conferenceId: conferenceId
       }
     }).then(_ => {});
+  }
+
+  payConference(conferenceId: number) {
+    console.log("userconference: " + conferenceId + " " + this.id);
+
+    let ok = false;
+    let userConference: UserConference;
+    this.userConferenceService.getUserConference(this.id, conferenceId).subscribe(
+      (uc) => {
+        userConference = uc;
+        ok = uc.paid;
+
+        if(ok)
+          window.alert("Already paid!")
+        else
+          this.userConferenceService.updatePaymentStatus(conferenceId, +this.id).subscribe(() => {window.alert("Successfully paid!");});
+      });
   }
 }

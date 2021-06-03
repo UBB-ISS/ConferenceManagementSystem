@@ -46,7 +46,7 @@ import { ResultService } from "./shared/result.service";
     ReviewAssignedPapersComponent,
     GiveReviewComponent,
     SendResultsComponent,
-    ViewResultsComponent
+    ViewResultsComponent,
   ],
   imports: [
     BrowserModule,

@@ -60,11 +60,8 @@ public class ReviewerPaperController {
 
     @RequestMapping(value="/changeStatusForAvailability/{id}", method = RequestMethod.PUT)
     public void changeStatus(@PathVariable int id, @RequestBody ReviewerPaperDTO reviewerPaperDTO) throws CMSException {
-        System.out.println("banane cu zmeura");
         logger.trace("ReviewerPaperController - changeStatus: method entered");
-        System.out.println("Controller: " + reviewerPaperDTO.toString());
         ReviewerPaper reviewerPaper = reviewerPaperConverter.convertDTOToModel(reviewerPaperDTO);
-        System.out.println("Controller: " + reviewerPaper.toString());
         reviewerPaperService.changeStatus(id);
         logger.trace("ReviewerPaperController - changeStatus: method finished");
     }
